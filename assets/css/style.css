@@ -182,3 +182,28 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
   .gallery figure:nth-child(4n+4) { margin-top: 7vw; justify-self: end; width: 94%; }
   .gallery figure:only-child { grid-column: 3 / span 8; }
 }
+
+/* project gallery, tablet/mobile: one swipeable strip. Native scroll-snap gives 1:1 tracking, release-velocity
+   momentum, rubber-banding and grab-to-interrupt for free; the next photo peeks in to hint at the gesture. */
+.gcount { display: none; }
+@media (max-width: 960px) {
+  .gallery {
+    display: flex; align-items: center; gap: 12px;
+    overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+  .gallery figure { flex: 0 0 86%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .gallery figure:only-child { flex-basis: 100%; }
+  .gallery figure.reveal { opacity: 1; transform: none; }  /* offscreen-sideways photos never "enter" vertically */
+
+  .gcount {
+    display: flex; align-items: center; gap: var(--gutter); margin-top: 14px;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .gbar { flex: 1; height: 1px; background: var(--line); overflow: hidden; }
+  .gbar span { display: block; height: 100%; background: var(--fg); transform-origin: left; transform: scaleX(0); will-change: transform; }
+}

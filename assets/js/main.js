@@ -60,3 +60,26 @@
     });
   });
 })();
+
+// Project gallery (mobile): the strip itself is native scroll-snap; this only mirrors its position into the
+// "n / total" counter and a progress line that moves continuously with the finger (transform only, rAF-throttled).
+(function () {
+  var g = document.querySelector('.gallery'), c = document.querySelector('.gcount');
+  if (!g || !c) return;
+  var figs = g.querySelectorAll('figure'), n = figs.length;
+  var txt = c.querySelector('.gcn'), fill = c.querySelector('.gbar span');
+  var idx = -1, queued = false;
+  function update() {
+    queued = false;
+    var max = g.scrollWidth - g.clientWidth;
+    if (max <= 0) return;                                          // desktop grid: nothing scrolls
+    var p = Math.min(Math.max(g.scrollLeft / max, 0), 1);          // rubber-band overscroll clamps to 0..1
+    fill.style.transform = 'scaleX(' + (1 / n + (1 - 1 / n) * p) + ')';
+    var i = Math.min(n - 1, Math.round(p * (n - 1)));
+    if (i !== idx) { idx = i; txt.textContent = (i + 1) + ' / ' + n; }
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  g.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  update();
+})();

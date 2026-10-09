@@ -64,7 +64,7 @@ require __DIR__ . '/inc/header.php';
     <div class="desc"><?= nl2br(e($p['description'])) ?></div>
   <?php endif; ?>
 
-  <div class="gallery">
+  <div class="gallery"<?= count($images) > 1 ? ' tabindex="0" role="region" aria-label="' . e($p['title']) . '"' : '' ?>>
     <?php foreach ($images as $im):
         $w = $h = 0; $cls = 'm';
         if ($dim = @getimagesize(UPLOAD_DIR . '/' . $im['filename'])) {
@@ -76,6 +76,9 @@ require __DIR__ . '/inc/header.php';
       <figure class="<?= $cls ?> reveal"><img src="<?= upload_url($im['filename']) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>" loading="lazy"></figure>
     <?php endforeach; ?>
   </div>
+  <?php if (count($images) > 1): ?>
+    <div class="gcount" aria-hidden="true"><span class="gcn">1 / <?= count($images) ?></span><span class="gbar"><span></span></span></div>
+  <?php endif; ?>
 
   <nav class="pnav">
     <a href="<?= lurl() ?>"><?= e(t('back_all')) ?></a>

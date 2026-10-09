@@ -55,7 +55,7 @@ $schemas = array_merge([org_schema(), [
 <?php if ($metaImage): ?><meta name="twitter:image" content="<?= e($metaImage) ?>">
 <?php endif; ?>
 
-<link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
+<link rel="stylesheet" href="<?= url('assets/css/style.css') ?>?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 <?= json_ld($schemas) ?>
 </head>
 <body>
