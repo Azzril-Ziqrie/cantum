@@ -1,11 +1,9 @@
 # local/server-specific config (copy config.sample.php to config.php on the server)
 config.php
 
-# live data: SQLite DB and user uploads stay on the server
+# live database stays on the server (uploads are tracked, compressed WebP)
 data/*
 !data/.htaccess
-uploads/*
-!uploads/.htaccess
 
 # misc
 image.png
