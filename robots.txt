@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /inc/
+Disallow: /invoice.php
+
+Sitemap: https://cantum-studio.site/sitemap.xml

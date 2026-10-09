@@ -1,0 +1,15 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# Indonesian version lives under /id/ (same scripts, language detected from the URL)
+RewriteRule ^id/?$ index.php [L,QSA]
+RewriteRule ^id/(about|contact|index-list|project)\.php$ $1.php [L,QSA]
+</IfModule>
+
+# never serve SQL dumps
+<FilesMatch "\.(sql|sqlite)$">
+Require all denied
+</FilesMatch>
