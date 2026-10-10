@@ -33,8 +33,8 @@ return [
     'title_pricing' => 'Pricing | Website Design Prices in Bogor',
     'desc_pricing' => 'Cantum Studio website prices: landing page from Rp 1.850.000, online shop from Rp 3.500.000. Domain, hosting, business email and SEO included. Web design studio in Bogor.',
     'pricing' => [
-        'lead' => "Fixed prices, no surprises. Every website comes with a domain, a year of hosting and business email, plus unlimited revisions until you're happy to go live.",
-        'title' => 'Pricing', 'sub' => 'Fixed prices in Indonesian rupiah. Unlimited revisions before release.',
+        'lead' => 'Every website comes with a domain, a year of hosting and business email.',
+        'title' => 'Pricing',
         'plans' => [
             ['Landing Page', 1850000, '', 'One page that explains what you do and makes it easy to get in touch.', [
                 '1 page website', 'Responsive design (mobile & desktop)', 'Custom UI/UX design', 'Basic SEO setup',
@@ -57,7 +57,7 @@ return [
         'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python or API integration.', 'On request'],
         'cta' => 'Start a project →',
         'terms_title' => 'Terms & conditions',
-        'terms' => ['50% deposit to start; final payment on completion.', 'Unlimited revisions before release; limited after.',
+        'terms' => ['50% deposit to start; final payment on completion.',
             'Extra requests may incur additional fees.', 'Domain and hosting are included.', 'You provide all required content.'],
         'terms_note' => 'Terms last updated October 2026.',
     ],
@@ -65,7 +65,7 @@ return [
         ['Does Cantum Studio build websites in Bogor?', 'Yes. Cantum Studio is based in Bogor, West Java, and works with clients in Bogor, Depok, Jakarta, Bekasi, Tangerang and across Indonesia. For clients outside Bogor we work remotely.'],
         ['What services do you offer?', 'We design and build company profile websites, portfolio websites, landing pages, online stores, website redesigns, and provide SEO and performance optimization.'],
         ['Are the websites SEO-friendly?', 'Yes. Every site is built with a clean heading structure, page titles and descriptions, structured data (schema), a sitemap, a mobile-first layout and fast loading, so it is easy for Google to find and understand.'],
-        ['What does the process look like?', 'We talk through your needs, design, build, revise, then launch. You are involved at every step and see progress before anything goes live.'],
+        ['What does the process look like?', 'We talk through your needs, design, build, then launch. You are involved at every step and see progress before anything goes live.'],
         ['Can I manage the content myself?', 'Yes. Our portfolio websites come with a dashboard to upload and edit projects without touching any code.'],
         ['How do I get started?', 'Reach out through the Contact page or Instagram @cantumstudio, tell us about your business and what you need, and we will take it from there.'],
     ],
@@ -103,8 +103,8 @@ return [
     'title_pricing' => 'Harga | Jasa Pembuatan Website Bogor',
     'desc_pricing' => 'Harga jasa pembuatan website Cantum Studio: landing page mulai Rp 1.850.000, toko online mulai Rp 3.500.000. Sudah termasuk domain, hosting, email bisnis, dan SEO. Studio web design di Bogor.',
     'pricing' => [
-        'lead' => 'Harga tetap, tanpa kejutan. Setiap website sudah termasuk domain, hosting satu tahun, dan email bisnis, serta revisi tanpa batas sampai kamu puas sebelum rilis.',
-        'title' => 'Harga', 'sub' => 'Harga tetap dalam rupiah. Revisi tanpa batas sebelum rilis.',
+        'lead' => 'Setiap website sudah termasuk domain, hosting satu tahun, dan email bisnis.',
+        'title' => 'Harga',
         'plans' => [
             ['Landing Page', 1850000, '', 'Satu halaman yang menjelaskan usahamu dan memudahkan orang menghubungimu.', [
                 'Website 1 halaman', 'Desain responsif (mobile & desktop)', 'Desain UI/UX custom', 'Setup SEO dasar',
@@ -127,7 +127,7 @@ return [
         'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python, atau integrasi API.', 'Sesuai permintaan'],
         'cta' => 'Mulai proyek →',
         'terms_title' => 'Syarat & ketentuan',
-        'terms' => ['DP 50% untuk memulai; pelunasan setelah selesai.', 'Revisi tanpa batas sebelum rilis; terbatas setelahnya.',
+        'terms' => ['DP 50% untuk memulai; pelunasan setelah selesai.',
             'Permintaan tambahan dapat dikenakan biaya.', 'Domain dan hosting sudah termasuk.', 'Kamu menyediakan seluruh konten yang dibutuhkan.'],
         'terms_note' => 'Syarat terakhir diperbarui Oktober 2026.',
     ],
@@ -135,7 +135,7 @@ return [
         ['Apakah Cantum Studio melayani jasa pembuatan website di Bogor?', 'Ya. Cantum Studio berbasis di Bogor, Jawa Barat, dan melayani klien di Bogor, Depok, Jakarta, Bekasi, Tangerang, serta seluruh Indonesia. Untuk klien di luar Bogor, kami bekerja secara remote.'],
         ['Layanan apa saja yang tersedia?', 'Kami membuat website company profile, website portofolio, landing page, toko online, redesain website lama, serta optimasi SEO dan kecepatan website.'],
         ['Apakah website yang dibuat sudah ramah SEO?', 'Ya. Setiap website dibangun dengan struktur heading yang benar, judul dan deskripsi halaman, data terstruktur (schema), sitemap, tampilan responsif di HP, dan kecepatan muat yang baik agar mudah ditemukan di Google.'],
-        ['Seperti apa proses pengerjaannya?', 'Diskusi kebutuhan, perancangan desain, pengembangan, revisi, lalu peluncuran. Kamu terlibat di setiap tahap dan melihat progres sebelum website dipublikasikan.'],
+        ['Seperti apa proses pengerjaannya?', 'Diskusi kebutuhan, perancangan desain, pengembangan, lalu peluncuran. Kamu terlibat di setiap tahap dan melihat progres sebelum website dipublikasikan.'],
         ['Apakah saya bisa mengelola konten website sendiri?', 'Bisa. Website portofolio kami dilengkapi dashboard untuk mengunggah dan mengubah proyek tanpa perlu menyentuh kode.'],
         ['Bagaimana cara memulai?', 'Hubungi kami lewat halaman Kontak atau Instagram @cantumstudio, ceritakan bisnis dan kebutuhan websitemu, dan kami bantu dari sana.'],
     ],
