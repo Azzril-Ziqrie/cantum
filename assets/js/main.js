@@ -131,3 +131,26 @@ document.querySelectorAll('[data-pager]').forEach(function (g) {
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
 })();
+
+// Shared-element page transition: name the project cover on the grid just for the navigation that needs it
+// (going forward on pageswap, coming back on pagereveal). Naming every card would snapshot every image.
+(function () {
+  if (!('onpageswap' in window)) return;
+  function key(u) { var x = new URL(u, location.href); return x.pathname + x.search; }
+  function card(url) {
+    var k = key(url), cards = document.querySelectorAll('a.card[data-vt]');
+    for (var i = 0; i < cards.length; i++) if (key(cards[i].href) === k) return cards[i];
+    return null;
+  }
+  function name(url) {
+    var c = card(url), t = c && c.querySelector('.thumb');
+    if (t) t.style.viewTransitionName = c.getAttribute('data-vt');
+  }
+  window.addEventListener('pageswap', function (e) {
+    if (e.viewTransition && e.activation && e.activation.entry) name(e.activation.entry.url);
+  });
+  window.addEventListener('pagereveal', function (e) {
+    var a = window.navigation && navigation.activation;
+    if (e.viewTransition && a && a.from) name(a.from.url);
+  });
+})();

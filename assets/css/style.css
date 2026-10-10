@@ -289,3 +289,16 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
   .plans:has(.plan:hover) .plan:not(:hover) > * { opacity: .4; }
 }
 @media (prefers-reduced-motion: reduce) { .plan > * { transition: none; } }
+
+/* ---- page transitions (cross-document View Transitions; browsers without support just navigate as usual) ----
+   The bar stays put, the page fades and settles in, and a project's cover image travels from the grid into the project page. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .bar { view-transition-name: bar; }
+  ::view-transition-old(root) { animation: vt-out .2s ease-in both; }
+  ::view-transition-new(root) { animation: vt-in .55s var(--spring) .05s both; }
+  ::view-transition-group(*) { animation-duration: .6s; animation-timing-function: var(--spring); }
+  ::view-transition-group(bar), ::view-transition-group(root) { animation-duration: 0s; }
+}
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }

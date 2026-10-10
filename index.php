@@ -34,7 +34,7 @@ require __DIR__ . '/inc/header.php';
         $cls = $r > 1.2 ? 'l' : ($r < 0.9 ? 'p' : 'm');
     }
   ?>
-    <a class="card <?= $cls ?> reveal" href="<?= lurl('project.php?slug=' . urlencode($p['slug'])) ?>">
+    <a class="card <?= $cls ?> reveal" data-vt="p-<?= (int)$p['id'] ?>" href="<?= lurl('project.php?slug=' . urlencode($p['slug'])) ?>">
       <div class="thumb">
         <?php if ($cover): ?>
           <img src="<?= upload_url($cover) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>" loading="lazy">

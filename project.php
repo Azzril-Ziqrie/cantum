@@ -65,7 +65,7 @@ require __DIR__ . '/inc/header.php';
   <?php endif; ?>
 
   <div class="gallery" data-pager<?= count($images) > 1 ? ' tabindex="0" role="region" aria-label="' . e($p['title']) . '"' : '' ?>>
-    <?php foreach ($images as $im):
+    <?php foreach ($images as $k => $im):
         $w = $h = 0; $cls = 'm';
         if ($dim = @getimagesize(UPLOAD_DIR . '/' . $im['filename'])) {
             [$w, $h] = $dim;
@@ -73,7 +73,7 @@ require __DIR__ . '/inc/header.php';
             $cls = $r > 1.2 ? 'l' : ($r < 0.9 ? 'p' : 'm');
         }
     ?>
-      <figure class="<?= $cls ?> reveal"><img src="<?= upload_url($im['filename']) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>" loading="lazy"></figure>
+      <figure class="<?= $cls . ($k === 0 ? '' : ' reveal') ?>"<?= $k === 0 ? ' style="view-transition-name:p-' . (int)$p['id'] . '"' : '' ?>><img src="<?= upload_url($im['filename']) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>"<?= $k === 0 ? '' : ' loading="lazy"' ?>></figure>
     <?php endforeach; ?>
   </div>
   <?php if (count($images) > 1): ?>
