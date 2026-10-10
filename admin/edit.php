@@ -4,7 +4,7 @@ require __DIR__ . '/_layout.php';
 require_login();
 
 $id = (int)($_GET['id'] ?? 0);
-$p = ['id' => 0, 'title' => '', 'category' => 'Architecture', 'year' => date('Y'), 'location' => '', 'description' => '', 'cover_id' => null, 'sort_order' => 0, 'published' => 1];
+$p = ['id' => 0, 'title' => '', 'category' => 'Architecture', 'year' => date('Y'), 'location' => '', 'description' => '', 'link' => '', 'cover_id' => null, 'sort_order' => 0, 'published' => 1];
 if ($id) {
     $st = db()->prepare('SELECT * FROM projects WHERE id = ?');
     $st->execute([$id]);
@@ -20,19 +20,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $year = trim($_POST['year'] ?? '');
     $location = trim($_POST['location'] ?? '');
     $description = trim($_POST['description'] ?? '');
+    $link = trim($_POST['link'] ?? '');
+    if ($link !== '' && !preg_match('#^https?://#i', $link)) $link = 'https://' . $link;   // "example.com" works too
     $published = isset($_POST['published']) ? 1 : 0;
     if ($title === '') $errors[] = 'Title is required.';
+    if ($link !== '' && !filter_var($link, FILTER_VALIDATE_URL)) $errors[] = 'That link does not look like a valid web address.';
 
     if (!$errors) {
         $pdo = db();
         if ($id) {
-            $pdo->prepare('UPDATE projects SET title=?, category=?, year=?, location=?, description=?, published=? WHERE id=?')
-                ->execute([$title, $category, $year, $location, $description, $published, $id]);
+            $pdo->prepare('UPDATE projects SET title=?, category=?, year=?, location=?, description=?, link=?, published=? WHERE id=?')
+                ->execute([$title, $category, $year, $location, $description, $link, $published, $id]);
         } else {
             $first = (int)$pdo->query('SELECT COALESCE(MIN(sort_order), 1) FROM projects')->fetchColumn() - 1; // new projects go first
-            $pdo->prepare('INSERT INTO projects (title, slug, category, year, location, description, published, sort_order)
-                           VALUES (?,?,?,?,?,?,?,?)')
-                ->execute([$title, unique_slug($title), $category, $year, $location, $description, $published, $first]);
+            $pdo->prepare('INSERT INTO projects (title, slug, category, year, location, description, link, published, sort_order)
+                           VALUES (?,?,?,?,?,?,?,?,?)')
+                ->execute([$title, unique_slug($title), $category, $year, $location, $description, $link, $published, $first]);
             $id = (int)$pdo->lastInsertId();
         }
 
@@ -66,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // upload problems: stay on the edit page so they can be seen
         $st = $pdo->prepare('SELECT * FROM projects WHERE id = ?'); $st->execute([$id]); $p = $st->fetch();
     } else {
-        $p = array_merge($p, compact('title', 'category', 'year', 'location', 'description', 'published'));
+        $p = array_merge($p, compact('title', 'category', 'year', 'location', 'description', 'link', 'published'));
     }
 }
 
@@ -95,6 +98,7 @@ admin_head($p['id'] ? 'Edit project' : 'New project');
     <label>Location<input name="location" value="<?= e($p['location']) ?>"></label>
   </div>
   <label>Description<textarea name="description" rows="6"><?= e($p['description']) ?></textarea></label>
+  <label>Website link <span class="muted">(optional, shown on the project page)</span><input name="link" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="https://client-website.com" value="<?= e($p['link'] ?? '') ?>"></label>
 
   <label class="check"><input type="checkbox" name="published" <?= $p['published'] ? 'checked' : '' ?>> Published (visible on the site)</label>
 

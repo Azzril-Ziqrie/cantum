@@ -22,7 +22,7 @@ return [
     'contact_empty' => "Contact details haven't been added yet.",
     'lbl_studio' => 'Studio', 'lbl_email' => 'Email', 'lbl_phone' => 'Phone', 'lbl_address' => 'Address', 'lbl_instagram' => 'Instagram',
 
-    'back_all' => '← All work', 'next' => 'Next: ', 'bc_work' => 'Work',
+    'back_all' => '← All work', 'next' => 'Next: ', 'bc_work' => 'Work', 'lbl_live' => 'Live site',
 
     'title_about' => 'Info & Services | Web Design Studio in Bogor',
     'desc_about' => 'About Cantum Studio, a web design studio in Bogor: company profile sites, portfolios, landing pages, online stores and SEO.',
@@ -92,7 +92,7 @@ return [
     'contact_empty' => 'Detail kontak belum ditambahkan.',
     'lbl_studio' => 'Studio', 'lbl_email' => 'Email', 'lbl_phone' => 'Telepon', 'lbl_address' => 'Alamat', 'lbl_instagram' => 'Instagram',
 
-    'back_all' => '← Semua karya', 'next' => 'Berikutnya: ', 'bc_work' => 'Karya',
+    'back_all' => '← Semua karya', 'next' => 'Berikutnya: ', 'bc_work' => 'Karya', 'lbl_live' => 'Situs',
 
     'title_about' => 'Info & Layanan | Jasa Pembuatan Website Bogor',
     'desc_about' => 'Tentang Cantum Studio, studio pembuatan website di Bogor: website company profile, portofolio, landing page, toko online, dan SEO.',

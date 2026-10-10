@@ -35,12 +35,15 @@ $canonicalPath = 'project.php?slug=' . $p['slug'];
 $pageUrl = abs_url((LANG === 'id' ? 'id/' : '') . $canonicalPath);
 $ogType = 'article';
 $cv = project_cover($p);
+$link = trim((string)($p['link'] ?? ''));
+$linkHost = $link !== '' ? preg_replace('/^www\./', '', (string)parse_url($link, PHP_URL_HOST)) . rtrim((string)parse_url($link, PHP_URL_PATH), '/') : '';
 $metaImage = $cv ? abs_url('uploads/' . $cv) : null;
 $jsonLd = [[
     '@context' => 'https://schema.org', '@type' => 'CreativeWork', 'inLanguage' => LANG,
     'name' => $p['title'], 'url' => $pageUrl, 'description' => $metaDesc,
     'genre' => $p['category'], 'dateCreated' => $p['year'] ?: null,
     'locationCreated' => $p['location'] ?: null,
+    'sameAs' => $link ?: null,
     'creator' => ['@id' => abs_url('#studio')],
     'image' => array_map(fn($im) => abs_url('uploads/' . $im['filename']), $images),
 ], [
@@ -62,6 +65,10 @@ require __DIR__ . '/inc/header.php';
 
   <?php if ($p['description']): ?>
     <div class="desc" data-generate><?= nl2br(e($p['description'])) ?></div>
+  <?php endif; ?>
+
+  <?php if ($link !== ''): ?>
+    <div class="plink"><span class="lbl"><?= e(t('lbl_live')) ?></span><a href="<?= e($link) ?>" target="_blank" rel="noopener"><?= e($linkHost) ?> <span aria-hidden="true">↗</span></a></div>
   <?php endif; ?>
 
   <div class="gallery" data-pager<?= count($images) > 1 ? ' tabindex="0" role="region" aria-label="' . e($p['title']) . '"' : '' ?>>

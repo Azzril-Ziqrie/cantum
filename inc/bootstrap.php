@@ -57,6 +57,7 @@ function db(): PDO
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
         foreach (mysql_schema() as $sql) $pdo->exec($sql);
+        ensure_project_link($pdo);
         seed_admin($pdo);
         return $pdo;
     }
@@ -115,8 +116,18 @@ function db(): PDO
         price INTEGER NOT NULL DEFAULT 0,
         sort_order INTEGER NOT NULL DEFAULT 0
     )");
+    ensure_project_link($pdo);
     seed_admin($pdo);
     return $pdo;
+}
+
+/** Adds projects.link (the project's live website) to databases created before it existed. */
+function ensure_project_link(PDO $pdo): void
+{
+    $mysql = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME) === 'mysql';
+    $cols = $mysql ? $pdo->query('SHOW COLUMNS FROM projects')->fetchAll(PDO::FETCH_COLUMN)
+                   : $pdo->query('PRAGMA table_info(projects)')->fetchAll(PDO::FETCH_COLUMN, 1);
+    if (!in_array('link', $cols, true)) $pdo->exec('ALTER TABLE projects ADD COLUMN link ' . ($mysql ? 'VARCHAR(500) NULL' : 'TEXT'));
 }
 
 function seed_admin(PDO $pdo): void

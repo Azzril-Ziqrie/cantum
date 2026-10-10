@@ -337,3 +337,12 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 @keyframes pic-zoom { from { scale: 1.24; } }
 @keyframes pic-drift { from { translate: 0 -5%; } to { translate: 0 5%; } }
 @keyframes cap-in { from { opacity: 0; transform: translateY(12px); } }
+
+/* project page: link to the live website, a single quiet row like the contact page */
+.plink { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: var(--gutter); padding: .9rem 0; margin-bottom: 40px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.plink .lbl { color: var(--muted); }
+.plink a { grid-column: 2 / span 2; justify-self: start; overflow-wrap: anywhere; transition: opacity .2s; }
+.plink a span { display: inline-block; color: var(--muted); transition: transform .35s var(--spring), color .2s; }
+.plink a:hover span { transform: translate(2px, -2px); color: var(--fg); }
+@media (max-width: 640px) { .plink { grid-template-columns: 7rem 1fr; } .plink a { grid-column: auto; } }
+@media (prefers-reduced-motion: reduce) { .plink a span { transition: none; } }
