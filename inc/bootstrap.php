@@ -1,6 +1,13 @@
 <?php
 // Cantum Studio — shared bootstrap: DB, session, helpers.
-session_start();
+// Sessions only where they are needed (dashboard, invoice preview, or a visitor who already has one). Public pages stay
+// cookie-free so they can be cached and crawled cleanly.
+$script = $_SERVER['SCRIPT_NAME'] ?? '';
+if (strpos($script, '/admin/') !== false || basename($script) === 'invoice.php' || isset($_COOKIE[session_name()])) {
+    session_start();
+} elseif (PHP_SAPI !== 'cli') {
+    header('Cache-Control: public, max-age=300, stale-while-revalidate=600');
+}
 
 define('ROOT', dirname(__DIR__));
 define('UPLOAD_DIR', ROOT . '/uploads');
@@ -201,7 +208,13 @@ function setting(string $key, string $default = ''): string
 }
 
 function e($s): string { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
-function url(string $path = ''): string { return BASE . '/' . ltrim($path, '/'); }
+/** Public URLs drop the .php extension (the .htaccess maps them back): about.php?x=1 → about?x=1, index.php → "". */
+function clean_path(string $path): string
+{
+    $path = preg_replace('#(^|/)index\.php(?=$|[?\#])#', '$1', $path);
+    return preg_replace('#\.php(?=$|[?\#])#', '', $path);
+}
+function url(string $path = ''): string { return BASE . '/' . ltrim(clean_path($path), '/'); }
 function upload_url(string $file): string { return url('uploads/' . rawurlencode($file)); }
 
 function slugify(string $s): string
@@ -309,7 +322,7 @@ function project_cover(array $p): ?string
     return $st->fetchColumn() ?: null;
 }
 
-function abs_url(string $path = ''): string { return SITE_URL . '/' . ltrim($path, '/'); }
+function abs_url(string $path = ''): string { return SITE_URL . '/' . ltrim(clean_path($path), '/'); }
 
 /** JSON-LD <script> blocks for a list of schema arrays. */
 function json_ld(array $schemas): string
@@ -343,6 +356,9 @@ function org_schema(): array
         'geo' => ['@type' => 'GeoCoordinates', 'latitude' => GEO['lat'], 'longitude' => GEO['lng']],
         'knowsAbout' => ['Web design', 'Web development', 'Website development', 'Company profile website', 'Landing page', 'E-commerce website', 'SEO', 'UI/UX design', 'Pembuatan website', 'Jasa pembuatan website', 'Jasa web design', 'Pembuatan website company profile', 'Pembuatan toko online'],
         'knowsLanguage' => ['id', 'en'],
+        'priceRange' => 'Rp 350.000 - Rp 4.500.000',
+        'currenciesAccepted' => 'IDR',
+        'paymentAccepted' => 'Bank transfer',
         'sameAs' => $sameAs,
         'makesOffer' => array_map(fn($n, $id) => ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => $n, 'alternateName' => $id, 'areaServed' => 'Bogor, Indonesia', 'provider' => ['@id' => abs_url('#studio')]]], SERVICES, SERVICES_ID),
     ];

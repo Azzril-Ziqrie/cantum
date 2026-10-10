@@ -3,11 +3,14 @@ require __DIR__ . '/inc/bootstrap.php';
 header('Content-Type: application/xml; charset=utf-8');
 
 // path, lastmod, priority, [image files], image title — each emitted for /en (root) and /id/ with hreflang alternates.
+$mod = fn(string $f) => date('Y-m-d', filemtime(__DIR__ . '/' . $f));
+$latest = db()->query('SELECT MAX(created_at) FROM projects WHERE published = 1')->fetchColumn();
 $pages = [
-    ['', null, '1.0', [], ''],
-    ['about.php', null, '0.8', [], ''],
-    ['index-list.php', null, '0.7', [], ''],
-    ['contact.php', null, '0.7', [], ''],
+    ['', max($mod('index.php'), substr((string)$latest, 0, 10)), '1.0', [], ''],
+    ['about.php', $mod('about.php'), '0.8', [], ''],
+    ['pricing.php', $mod('pricing.php'), '0.8', [], ''],
+    ['index-list.php', $mod('index-list.php'), '0.7', [], ''],
+    ['contact.php', $mod('contact.php'), '0.7', [], ''],
 ];
 $imgs = db()->prepare('SELECT filename FROM images WHERE project_id = ? ORDER BY sort_order, id');
 foreach (db()->query('SELECT * FROM projects WHERE published = 1 ORDER BY id DESC')->fetchAll() as $p) {

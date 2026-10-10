@@ -22,7 +22,7 @@ $aboutText = LANG === 'id' ? (setting('about_text_id') ?: t('about_default')) : 
 <section class="about">
   <div class="lead">
     <h1><?= e(LANG === 'en' && setting('about_title') ? setting('about_title') : t('nav_info')) ?></h1>
-    <div class="prose"><?= nl2br(e($aboutText)) ?></div>
+    <div class="prose" data-generate><?= nl2br(e($aboutText)) ?></div>
 
     <div class="acc">
       <details>

@@ -3,6 +3,6 @@ Allow: /
 Disallow: /admin/
 Disallow: /data/
 Disallow: /inc/
-Disallow: /invoice.php
+Disallow: /invoice
 
 Sitemap: https://cantum-studio.site/sitemap.xml

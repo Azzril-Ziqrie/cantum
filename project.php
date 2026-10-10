@@ -61,10 +61,10 @@ require __DIR__ . '/inc/header.php';
   </header>
 
   <?php if ($p['description']): ?>
-    <div class="desc"><?= nl2br(e($p['description'])) ?></div>
+    <div class="desc" data-generate><?= nl2br(e($p['description'])) ?></div>
   <?php endif; ?>
 
-  <div class="gallery"<?= count($images) > 1 ? ' tabindex="0" role="region" aria-label="' . e($p['title']) . '"' : '' ?>>
+  <div class="gallery" data-pager<?= count($images) > 1 ? ' tabindex="0" role="region" aria-label="' . e($p['title']) . '"' : '' ?>>
     <?php foreach ($images as $im):
         $w = $h = 0; $cls = 'm';
         if ($dim = @getimagesize(UPLOAD_DIR . '/' . $im['filename'])) {

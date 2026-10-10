@@ -2,7 +2,7 @@
 // Public-site copy in English (default, served at /) and Indonesian (served at /id/).
 return [
 'en' => [
-    'nav_info' => 'Info', 'nav_index' => 'Index', 'nav_contact' => 'Contact',
+    'nav_info' => 'Info', 'nav_index' => 'Index', 'nav_pricing' => 'Pricing', 'nav_contact' => 'Contact',
     'footer_tagline' => 'Selected works',
 
     'title_home' => 'Cantum Studio — Web Design Studio in Bogor',
@@ -30,6 +30,37 @@ return [
     'about_default' => "Cantum Studio is a web design studio based in Bogor, West Java. We build websites that don't just look striking — they load fast, get found on Google, and make people confident enough to reach out.\n\nWe work with businesses, studios, brands and professionals in Bogor, Greater Jakarta and across Indonesia — from design and development to on-page SEO and launch.",
     'h_services' => 'Services', 'h_based' => 'Location', 'h_faq' => 'FAQ',
     'based_text' => 'We are based in Bogor, West Java, and serve clients in Bogor, Depok, Jakarta, Bekasi, Tangerang and across Indonesia — in person nearby, remotely everywhere else.',
+    'title_pricing' => 'Pricing — Website Design Prices in Bogor',
+    'desc_pricing' => 'Cantum Studio website prices: landing page from Rp 1.850.000, online shop from Rp 3.500.000. Domain, hosting, business email and SEO included. Web design studio in Bogor.',
+    'pricing' => [
+        'lead' => "Fixed prices, no surprises. Every website comes with a domain, a year of hosting and business email — and unlimited revisions until you're happy to go live.",
+        'title' => 'Pricing', 'sub' => 'Fixed prices in Indonesian rupiah. Unlimited revisions before release.',
+        'plans' => [
+            ['Landing Page', 1850000, '', 'One page that explains what you do and makes it easy to get in touch.', [
+                '1 page website', 'Responsive design (mobile & desktop)', 'Custom UI/UX design', 'Basic SEO setup',
+                'Contact form / WhatsApp integration', 'Social media integration', 'Email integration']],
+            ['Online Shop · Asia', 3500000, '', 'A custom store for selling across Asia.', [
+                'Custom UI/UX design', 'Responsive design', 'Product catalog', 'Shopping cart', 'Payment gateway integration',
+                'Shipping cost', 'Order management', 'Basic SEO optimization', 'CMS for product management', 'Dashboard management']],
+            ['Online Shop · Worldwide', 4500000, '', 'Everything in the Asia shop, ready to sell internationally.', [
+                'Custom UI/UX design', 'Responsive design', 'Product catalog', 'Shopping cart', 'Payment gateway integration',
+                'Shipping cost', 'Order management', 'Basic SEO optimization', 'CMS for product management', 'Dashboard management',
+                'International service']],
+        ],
+        'from' => 'Rp',
+        'incl_title' => 'Included with every website',
+        'incl' => ['Domain .com', 'Hosting for 1 year', '5 business emails on your domain', 'SEO & GEO setup', '6 months of free maintenance'],
+        'extras' => [
+            ['Re-design', 350000, '/ page', 'UI/UX improvement, visual refinement, responsive design, layout and navigation optimization, typography and color refinement.'],
+            ['Maintenance', 500000, '/ 6 months', 'Updates, backups, bug fixes, security and performance checks, and minor content changes.'],
+        ],
+        'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python or API integration.', 'On request'],
+        'cta' => 'Start a project →',
+        'terms_title' => 'Terms & conditions',
+        'terms' => ['50% deposit to start; final payment on completion.', 'Unlimited revisions before release; limited after.',
+            'Extra requests may incur additional fees.', 'Domain and hosting are included.', 'You provide all required content.'],
+        'terms_note' => 'Terms last updated October 2026.',
+    ],
     'faq' => [
         ['Does Cantum Studio build websites in Bogor?', 'Yes. Cantum Studio is based in Bogor, West Java, and works with clients in Bogor, Depok, Jakarta, Bekasi, Tangerang and across Indonesia. For clients outside Bogor we work remotely.'],
         ['What services do you offer?', 'We design and build company profile websites, portfolio websites, landing pages, online stores, website redesigns, and provide SEO and performance optimization.'],
@@ -41,7 +72,7 @@ return [
 ],
 
 'id' => [
-    'nav_info' => 'Info', 'nav_index' => 'Indeks', 'nav_contact' => 'Kontak',
+    'nav_info' => 'Info', 'nav_index' => 'Indeks', 'nav_pricing' => 'Harga', 'nav_contact' => 'Kontak',
     'footer_tagline' => 'Karya pilihan',
 
     'title_home' => 'Cantum Studio — Jasa Pembuatan Website di Bogor',
@@ -69,6 +100,37 @@ return [
     'about_default' => "Cantum Studio adalah studio pembuatan website yang berbasis di Bogor, Jawa Barat. Kami membangun website yang bukan hanya tampil memukau, tapi juga cepat, mudah ditemukan di Google, dan membuat orang yakin untuk menghubungimu.\n\nKami bekerja dengan bisnis, studio, brand, dan profesional di Bogor, Jabodetabek, dan seluruh Indonesia — dari desain, pengembangan, sampai SEO dasar dan peluncuran.",
     'h_services' => 'Layanan', 'h_based' => 'Lokasi', 'h_faq' => 'Pertanyaan umum',
     'based_text' => 'Kami berkantor di Bogor, Jawa Barat, dan melayani klien di Bogor, Depok, Jakarta, Bekasi, Tangerang, hingga seluruh Indonesia — bertemu langsung untuk area terdekat, dan secara remote untuk lainnya.',
+    'title_pricing' => 'Harga — Jasa Pembuatan Website Bogor',
+    'desc_pricing' => 'Harga jasa pembuatan website Cantum Studio: landing page mulai Rp 1.850.000, toko online mulai Rp 3.500.000. Sudah termasuk domain, hosting, email bisnis, dan SEO. Studio web design di Bogor.',
+    'pricing' => [
+        'lead' => 'Harga tetap, tanpa kejutan. Setiap website sudah termasuk domain, hosting satu tahun, dan email bisnis — dengan revisi tanpa batas sampai kamu puas sebelum rilis.',
+        'title' => 'Harga', 'sub' => 'Harga tetap dalam rupiah. Revisi tanpa batas sebelum rilis.',
+        'plans' => [
+            ['Landing Page', 1850000, '', 'Satu halaman yang menjelaskan usahamu dan memudahkan orang menghubungimu.', [
+                'Website 1 halaman', 'Desain responsif (mobile & desktop)', 'Desain UI/UX custom', 'Setup SEO dasar',
+                'Integrasi form kontak / WhatsApp', 'Integrasi media sosial', 'Integrasi email']],
+            ['Toko Online · Asia', 3500000, '', 'Toko online custom untuk berjualan ke seluruh Asia.', [
+                'Desain UI/UX custom', 'Desain responsif', 'Katalog produk', 'Keranjang belanja', 'Integrasi payment gateway',
+                'Ongkos kirim', 'Manajemen pesanan', 'Optimasi SEO dasar', 'CMS untuk kelola produk', 'Dashboard manajemen']],
+            ['Toko Online · Worldwide', 4500000, '', 'Semua fitur toko Asia, siap berjualan ke seluruh dunia.', [
+                'Desain UI/UX custom', 'Desain responsif', 'Katalog produk', 'Keranjang belanja', 'Integrasi payment gateway',
+                'Ongkos kirim', 'Manajemen pesanan', 'Optimasi SEO dasar', 'CMS untuk kelola produk', 'Dashboard manajemen',
+                'Layanan internasional']],
+        ],
+        'from' => 'Rp',
+        'incl_title' => 'Termasuk di setiap website',
+        'incl' => ['Domain .com', 'Hosting 1 tahun', '5 email bisnis dengan domain sendiri', 'Setup SEO & GEO', 'Gratis maintenance 6 bulan'],
+        'extras' => [
+            ['Redesain', 350000, '/ halaman', 'Perbaikan UI/UX, penyempurnaan visual, desain responsif, optimasi layout dan navigasi, serta penyempurnaan tipografi dan warna.'],
+            ['Maintenance', 500000, '/ 6 bulan', 'Pembaruan, backup, perbaikan bug, pengecekan keamanan dan performa, serta perubahan konten kecil.'],
+        ],
+        'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python, atau integrasi API.', 'Sesuai permintaan'],
+        'cta' => 'Mulai proyek →',
+        'terms_title' => 'Syarat & ketentuan',
+        'terms' => ['DP 50% untuk memulai; pelunasan setelah selesai.', 'Revisi tanpa batas sebelum rilis; terbatas setelahnya.',
+            'Permintaan tambahan dapat dikenakan biaya.', 'Domain dan hosting sudah termasuk.', 'Kamu menyediakan seluruh konten yang dibutuhkan.'],
+        'terms_note' => 'Syarat terakhir diperbarui Oktober 2026.',
+    ],
     'faq' => [
         ['Apakah Cantum Studio melayani jasa pembuatan website di Bogor?', 'Ya. Cantum Studio berbasis di Bogor, Jawa Barat, dan melayani klien di Bogor, Depok, Jakarta, Bekasi, Tangerang, serta seluruh Indonesia. Untuk klien di luar Bogor, kami bekerja secara remote.'],
         ['Layanan apa saja yang tersedia?', 'Kami membuat website company profile, website portofolio, landing page, toko online, redesain website lama, serta optimasi SEO dan kecepatan website.'],

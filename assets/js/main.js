@@ -61,13 +61,12 @@
   });
 })();
 
-// Project gallery (mobile): the strip itself is native scroll-snap; this only mirrors its position into the
-// "n / total" counter and a progress line that moves continuously with the finger (transform only, rAF-throttled).
-(function () {
-  var g = document.querySelector('.gallery'), c = document.querySelector('.gcount');
-  if (!g || !c) return;
-  var figs = g.querySelectorAll('figure'), n = figs.length;
-  var txt = c.querySelector('.gcn'), fill = c.querySelector('.gbar span');
+// Swipe pages (project gallery, pricing plans): the strip itself is native scroll-snap; this only mirrors its position
+// into the "n / total" counter and a progress line that moves continuously with the finger (transform only, rAF-throttled).
+document.querySelectorAll('[data-pager]').forEach(function (g) {
+  var c = g.nextElementSibling;
+  if (!c || !c.classList.contains('gcount')) return;
+  var n = g.children.length, txt = c.querySelector('.gcn'), fill = c.querySelector('.gbar span');
   var idx = -1, queued = false;
   function update() {
     queued = false;
@@ -82,4 +81,53 @@
   g.addEventListener('scroll', queue, { passive: true });
   window.addEventListener('resize', queue);
   update();
+});
+
+// Floating Navbar (Aceternity): hide on scroll down, reveal on scroll up. Always visible near the top,
+// while a nav link has focus, and when the user prefers reduced motion.
+(function () {
+  var bar = document.querySelector('.bar.site');
+  if (!bar) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var last = window.scrollY, queued = false;
+  function update() {
+    queued = false;
+    var y = Math.max(window.scrollY, 0), d = y - last;             // ignore iOS rubber-band (negative) scroll
+    if (reduce.matches || y < 40 || d < -6 || bar.contains(document.activeElement)) bar.classList.remove('away');
+    else if (d > 6) bar.classList.add('away');
+    if (Math.abs(d) > 6) last = y;
+  }
+  window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  bar.addEventListener('focusin', function () { bar.classList.remove('away'); });
+})();
+
+// Text Generate Effect (Aceternity): [data-generate] text resolves word by word when it scrolls into view.
+// Words are wrapped in place, so the text stays in the HTML for search engines and screen readers.
+(function () {
+  var els = document.querySelectorAll('[data-generate]');
+  if (!els.length || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  els.forEach(function (el) {
+    var n = 0;
+    (function wrap(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.nodeValue.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            var s = document.createElement('span');
+            s.className = 'w'; s.textContent = part;
+            s.style.setProperty('--d', Math.min(n++ * 45, 1400) + 'ms');   // cap total stagger so long text never drags
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, c);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') wrap(c);
+      });
+    })(el);
+    el.classList.add('gen');
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { io.observe(el); });
 })();

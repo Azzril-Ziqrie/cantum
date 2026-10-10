@@ -7,8 +7,8 @@ function admin_head(string $title): void { ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title><?= e($title) ?> — Dashboard</title>
-<link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
-<link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>">
+<link rel="stylesheet" href="<?= url('assets/css/style.css') ?>?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
+<link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>?v=<?= filemtime(__DIR__ . '/../assets/css/admin.css') ?>">
 </head>
 <body class="admin">
 <header class="bar">

@@ -14,6 +14,10 @@ $altEn = abs_url($canonicalPath ?? '');
 $altId = abs_url('id/' . ($canonicalPath ?? ''));
 $ogType = $ogType ?? 'website';
 $metaImage = $metaImage ?? null;
+if (!$metaImage) {   // share previews for pages without their own image: the studio's first project cover
+    $first = db()->query('SELECT * FROM projects WHERE published = 1 ORDER BY sort_order ASC, year DESC, id DESC LIMIT 1')->fetch();
+    if ($first && ($c = project_cover($first))) $metaImage = abs_url('uploads/' . $c);
+}
 $schemas = array_merge([org_schema(), [
     '@context' => 'https://schema.org', '@type' => 'WebSite', '@id' => abs_url('#website'),
     'url' => SITE_URL . '/', 'name' => SITE_NAME, 'inLanguage' => LANG,
@@ -64,7 +68,10 @@ $schemas = array_merge([org_schema(), [
   <nav>
     <a href="<?= lurl('about.php') ?>"><?= e(t('nav_info')) ?></a>
     <a href="<?= lurl('index-list.php') ?>"><?= e(t('nav_index')) ?></a>
-    <a href="<?= lurl('contact.php') ?>"><?= e(t('nav_contact')) ?></a>
+    <span class="end">
+      <a href="<?= lurl('pricing.php') ?>"><?= e(t('nav_pricing')) ?></a>
+      <a href="<?= lurl('contact.php') ?>"><?= e(t('nav_contact')) ?></a>
+    </span>
   </nav>
 </header>
 <main>
