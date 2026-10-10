@@ -36,7 +36,7 @@ function lurl(string $path = ''): string { return url((LANG === 'id' ? 'id/' : '
 const SITE_NAME = 'Cantum Studio';
 const SITE_URL = 'https://cantum-studio.site';
 const SITE_TAGLINE = 'Web Design Studio in Bogor';
-const SITE_DESC = 'Web design & development studio in Bogor, Indonesia — company profile websites, landing pages, portfolios and online stores. Jasa pembuatan website Bogor.';
+const SITE_DESC = 'Web design & development studio in Bogor, Indonesia: company profile websites, landing pages, portfolios and online stores. Jasa pembuatan website Bogor.';
 const GEO = ['city' => 'Bogor', 'region' => 'Jawa Barat', 'region_code' => 'ID-JB', 'country' => 'ID', 'lat' => -6.5971, 'lng' => 106.8060];
 const SERVICES = ['Company Profile Websites', 'Portfolio Websites', 'Landing Pages', 'Online Stores (E-commerce)', 'Website Redesign', 'SEO & Performance Optimization'];
 // Indonesian names for the same services (same order) — used in structured data only, so Indonesian searches still match.

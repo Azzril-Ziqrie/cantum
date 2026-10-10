@@ -48,16 +48,16 @@ admin_head('Settings');
   <label>Home headline<textarea name="headline" rows="2"><?= e(sv('headline', 'Cantum Studio designs spaces, objects and identities with quiet intent.')) ?></textarea></label>
   <label>Tagline (footer)<input name="tagline" value="<?= e(sv('tagline', 'Selected works')) ?>"></label>
   <label>About title<input name="about_title" value="<?= e(sv('about_title', 'About the studio')) ?>"></label>
-  <label>About text (English — shown on the main site)<textarea name="about_text" rows="6"><?= e(sv('about_text')) ?></textarea></label>
-  <label>About text (Indonesian — shown at /id/, for Indonesian search)<textarea name="about_text_id" rows="6"><?= e(sv('about_text_id')) ?></textarea></label>
+  <label>About text (English, shown on the main site)<textarea name="about_text" rows="6"><?= e(sv('about_text')) ?></textarea></label>
+  <label>About text (Indonesian, shown at /id/ for Indonesian search)<textarea name="about_text_id" rows="6"><?= e(sv('about_text_id')) ?></textarea></label>
   <div class="cols">
     <label>Email<input type="email" name="email" value="<?= e(sv('email')) ?>"></label>
     <label>Phone<input name="phone" value="<?= e(sv('phone')) ?>"></label>
     <label>Instagram URL<input name="instagram" value="<?= e(sv('instagram')) ?>"></label>
   </div>
   <label>Address<textarea name="address" rows="2"><?= e(sv('address')) ?></textarea></label>
-  <label>Invoice — payment details (bank, account number, name)<textarea name="invoice_payment" rows="3" placeholder="BCA 1234567890 a.n. Nama Kamu"><?= e(sv('invoice_payment')) ?></textarea></label>
-  <label>Invoice — default notes / terms<textarea name="invoice_terms" rows="3" placeholder="Pembayaran paling lambat pada tanggal jatuh tempo."><?= e(sv('invoice_terms')) ?></textarea></label>
+  <label>Invoice: payment details (bank, account number, name)<textarea name="invoice_payment" rows="3" placeholder="BCA 1234567890 a.n. Nama Kamu"><?= e(sv('invoice_payment')) ?></textarea></label>
+  <label>Invoice: default notes / terms<textarea name="invoice_terms" rows="3" placeholder="Pembayaran paling lambat pada tanggal jatuh tempo."><?= e(sv('invoice_terms')) ?></textarea></label>
   <div class="row"><button class="btn" type="submit">Save settings</button></div>
 </form>
 

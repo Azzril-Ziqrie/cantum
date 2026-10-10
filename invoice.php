@@ -23,7 +23,7 @@ $d = fn($x) => $x ? date('j F Y', strtotime($x)) : '';
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Invoice <?= e($inv['number']) ?> — <?= e(SITE_NAME) ?></title>
+<title>Invoice <?= e($inv['number']) ?> | <?= e(SITE_NAME) ?></title>
 <style>
   :root { --fg:#0a0a0a; --muted:#8c8c8c; --line:#e6e6e6; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,7 +86,7 @@ $d = fn($x) => $x ? date('j F Y', strtotime($x)) : '';
       <?php if ($inv['client_phone']): ?><?= e($inv['client_phone']) ?><?php endif; ?>
     </div>
     <div><h2>Issue date</h2><?= e($d($inv['issue_date'])) ?></div>
-    <div><h2>Due date</h2><?= $inv['due_date'] ? e($d($inv['due_date'])) : '—' ?>
+    <div><h2>Due date</h2><?= $inv['due_date'] ? e($d($inv['due_date'])) : '-' ?>
       <?php if ($inv['status'] === 'paid' && $inv['paid_at']): ?><br><span class="muted">Paid on <?= e($d($inv['paid_at'])) ?></span><?php endif; ?></div>
   </div>
 

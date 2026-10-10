@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Log in — <?= e(SITE_NAME) ?></title>
+<title>Log in | <?= e(SITE_NAME) ?></title>
 <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
 <link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>">
 </head>

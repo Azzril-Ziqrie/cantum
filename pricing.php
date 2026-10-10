@@ -8,7 +8,7 @@ $pageTitle = t('title_pricing');
 $metaDesc = t('desc_pricing');
 $canonicalPath = 'pricing.php';
 $jsonLd = [[
-    '@context' => 'https://schema.org', '@type' => 'OfferCatalog', 'name' => $pr['title'] . ' — ' . SITE_NAME, 'inLanguage' => LANG,
+    '@context' => 'https://schema.org', '@type' => 'OfferCatalog', 'name' => $pr['title'] . ' | ' . SITE_NAME, 'inLanguage' => LANG,
     'itemListElement' => array_map(fn($x) => [
         '@type' => 'Offer', 'price' => $x[1], 'priceCurrency' => 'IDR',
         'itemOffered' => ['@type' => 'Service', 'name' => $x[0], 'provider' => ['@id' => abs_url('#studio')]],
@@ -34,7 +34,7 @@ $n = count($pr['plans']);
     <?php foreach ($pr['plans'] as $pl): ?>
     <article class="plan">
       <h2><?= e($pl[0]) ?></h2>
-      <p class="price"><span class="cur"><?= e($pr['from']) ?></span><?= $rp($pl[1]) ?></p>
+      <p class="price"><span class="from"><?= e($pr['starting']) ?></span><span class="amt"><span class="cur"><?= e($pr['from']) ?></span><?= $rp($pl[1]) ?></span></p>
       <p class="blurb"><?= e($pl[3]) ?></p>
       <ul><?php foreach ($pl[4] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
       <a class="go" href="<?= lurl('contact.php') ?>"><?= e($pr['cta']) ?></a>

@@ -23,14 +23,14 @@ $idx = array_search($p['slug'], array_column($all, 'slug'));
 $next = $all[($idx + 1) % count($all)];
 $num = str_pad((string)(count($all) - $idx), 2, '0', STR_PAD_LEFT);
 
-$pageTitle = $p['title'] . ($p['category'] ? ' — ' . $p['category'] : '');
+$pageTitle = $p['title'] . ($p['category'] ? ' | ' . $p['category'] : '');
 $plain = trim(preg_replace('/\s+/', ' ', (string)$p['description']));
 $yr = $p['year'] ? ' (' . $p['year'] . ')' : '';
 $metaDesc = $plain !== ''
     ? mb_substr($plain, 0, 155) . (mb_strlen($plain) > 155 ? '…' : '')
     : (LANG === 'id'
-        ? $p['title'] . ' — proyek ' . strtolower($p['category']) . $yr . ' oleh Cantum Studio, studio pembuatan website di Bogor.'
-        : $p['title'] . ' — ' . strtolower($p['category']) . ' project' . $yr . ' by Cantum Studio, a web design studio in Bogor.');
+        ? $p['title'] . ', proyek ' . strtolower($p['category']) . $yr . ' oleh Cantum Studio, studio pembuatan website di Bogor.'
+        : $p['title'] . ', ' . strtolower($p['category']) . ' project' . $yr . ' by Cantum Studio, a web design studio in Bogor.');
 $canonicalPath = 'project.php?slug=' . $p['slug'];
 $pageUrl = abs_url((LANG === 'id' ? 'id/' : '') . $canonicalPath);
 $ogType = 'article';

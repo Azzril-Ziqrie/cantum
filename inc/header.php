@@ -7,7 +7,7 @@
 //   $canonicalPath path relative to site root ('' = home)
 //   $ogType        website | article
 //   $jsonLd        extra schema arrays
-$fullTitle = $fullTitle ?? (isset($pageTitle) ? $pageTitle . ' — ' . SITE_NAME : t('title_home'));
+$fullTitle = $fullTitle ?? (isset($pageTitle) ? $pageTitle . ' | ' . SITE_NAME : t('title_home'));
 $metaDesc = $metaDesc ?? t('desc_home');
 $canonical = abs_url((LANG === 'id' ? 'id/' : '') . ($canonicalPath ?? ''));
 $altEn = abs_url($canonicalPath ?? '');

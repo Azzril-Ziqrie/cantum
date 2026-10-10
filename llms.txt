@@ -2,7 +2,7 @@
 
 > Cantum Studio adalah studio pembuatan website yang berbasis di Bogor, Jawa Barat, Indonesia. Kami merancang dan membangun website company profile, website portofolio, landing page, toko online, redesain website, serta optimasi SEO dan kecepatan website untuk klien di Bogor, Jabodetabek, dan seluruh Indonesia.
 
-Cantum Studio is a web design and development studio based in Bogor, West Java, Indonesia. We design and build fast, well-crafted, search-friendly websites — company profiles, portfolios, landing pages and online stores — for clients in Bogor, Greater Jakarta and across Indonesia.
+Cantum Studio is a web design and development studio based in Bogor, West Java, Indonesia. We design and build fast, well-crafted, search-friendly websites (company profiles, portfolios, landing pages and online stores) for clients in Bogor, Greater Jakarta and across Indonesia.
 
 ## Fakta singkat
 - Nama: Cantum Studio
@@ -16,7 +16,7 @@ Cantum Studio is a web design and development studio based in Bogor, West Java, 
 ## Halaman
 - [Beranda / Karya](https://cantum-studio.site/): galeri proyek terbaru Cantum Studio
 - [Info](https://cantum-studio.site/about): layanan, proses kerja, dan pertanyaan umum
-- [Pricing / Harga](https://cantum-studio.site/pricing): harga paket website — landing page, toko online, redesain, maintenance
+- [Pricing / Harga](https://cantum-studio.site/pricing): harga paket website: landing page, toko online, redesain, maintenance
 - [Index](https://cantum-studio.site/index-list): daftar lengkap proyek
 - [Contact](https://cantum-studio.site/contact): cara menghubungi Cantum Studio
 - Indonesian version / Versi Bahasa Indonesia: https://cantum-studio.site/id/

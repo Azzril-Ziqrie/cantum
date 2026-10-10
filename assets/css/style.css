@@ -244,7 +244,9 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 .plan { display: flex; flex-direction: column; border-top: 1px solid var(--fg); padding-top: .7rem; }
 .plan > * { transition: opacity .45s var(--spring); }
 .plan h2 { font-size: inherit; font-weight: 400; color: var(--muted); }
-.price { font-size: 40px; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; margin: 2.2rem 0 1rem; }
+.price { display: grid; gap: .9rem; margin: 2.2rem 0 1rem; }
+.price .from { color: var(--muted); }
+.price .amt { font-size: 40px; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 .price .cur { font-size: 10px; letter-spacing: 0; color: var(--muted); margin-right: .5rem; vertical-align: 1.3em; }
 .blurb { color: var(--muted); max-width: 30ch; margin-bottom: 2rem; }
 .plan ul { list-style: none; margin-bottom: 2rem; }

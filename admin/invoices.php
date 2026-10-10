@@ -54,7 +54,7 @@ admin_head('Invoices');
       $msg = "Halo {$inv['client_name']}, berikut tagihan {$inv['number']} dari " . SITE_NAME . " sebesar " . rupiah($total)
            . ($inv['due_date'] ? ", jatuh tempo " . id_date($inv['due_date']) : '') . ".\nDetail & pembayaran: " . $link . "\nTerima kasih!";
       $wa = 'https://wa.me/' . wa_number((string)$inv['client_phone']) . '?text=' . rawurlencode($msg);
-      $mail = 'mailto:' . rawurlencode((string)$inv['client_email']) . '?subject=' . rawurlencode('Invoice ' . $inv['number'] . ' — ' . SITE_NAME) . '&body=' . rawurlencode($msg);
+      $mail = 'mailto:' . rawurlencode((string)$inv['client_email']) . '?subject=' . rawurlencode('Invoice ' . $inv['number'] . ' | ' . SITE_NAME) . '&body=' . rawurlencode($msg);
   ?>
     <tr>
       <td><a href="<?= url('admin/invoice_edit.php?id=' . $inv['id']) ?>"><strong><?= e($inv['number']) ?></strong></a><br><span class="muted"><?= e(id_date($inv['issue_date'])) ?></span></td>
