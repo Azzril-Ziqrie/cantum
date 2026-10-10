@@ -304,3 +304,36 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 }
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---- home grid on touch screens: scroll-driven motion ----
+   Everything is tied to the scroll position itself (so it follows the finger 1:1, reverses when you scroll back, and
+   needs no JS): a card rises and settles as it enters, its photo zooms out while drifting slower than the frame
+   (depth), the caption arrives a beat later, and a card eases back as it leaves the top. Only transform/opacity.
+   Browsers without scroll-driven animations keep the plain fade-in above. */
+@media (max-width: 960px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .card.reveal { opacity: 1; transform: none; transition: none; }
+
+    .card {
+      animation: card-in linear backwards, card-out linear forwards;
+      animation-timeline: view(), view();
+      animation-range: entry 0% entry 55%, exit 40% exit 100%;
+    }
+    .thumb img, .thumb .ph {
+      scale: 1.1; transition: none;
+      animation: pic-zoom linear backwards, pic-drift linear both;
+      animation-timeline: view(), view();
+      animation-range: entry 0% entry 70%, cover 0% cover 100%;
+    }
+    .cap {
+      animation: cap-in linear backwards;
+      animation-timeline: view();
+      animation-range: entry 25% entry 80%;
+    }
+  }
+}
+@keyframes card-in { from { opacity: .15; transform: translateY(7vh) scale(.95); } }
+@keyframes card-out { to { opacity: .3; transform: scale(.93); } }
+@keyframes pic-zoom { from { scale: 1.24; } }
+@keyframes pic-drift { from { translate: 0 -5%; } to { translate: 0 5%; } }
+@keyframes cap-in { from { opacity: 0; transform: translateY(12px); } }
