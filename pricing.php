@@ -37,7 +37,11 @@ $n = count($pr['plans']);
       <p class="price"><span class="from"><?= e($pr['starting']) ?></span><span class="amt"><span class="cur"><?= e($pr['from']) ?></span><?= $rp($pl[1]) ?></span></p>
       <p class="blurb"><?= e($pl[3]) ?></p>
       <ul><?php foreach ($pl[4] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
-      <a class="go" href="<?= lurl('contact.php') ?>"><?= e($pr['cta']) ?></a>
+      <?php if ($wa = wa_link(sprintf(t('wa_msg_plan'), $pl[0]))): ?>
+        <a class="go" href="<?= e($wa) ?>" target="_blank" rel="noopener" data-wa="pricing:<?= e(trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($pl[0])), '-')) ?>"><?= e($pr['cta_wa']) ?></a>
+      <?php else: ?>
+        <a class="go" href="<?= lurl('contact.php') ?>"><?= e($pr['cta']) ?></a>
+      <?php endif; ?>
     </article>
     <?php endforeach; ?>
   </div>
@@ -54,7 +58,7 @@ $n = count($pr['plans']);
     <li>
       <span class="n"><?= e($pr['custom'][0]) ?></span>
       <span class="d"><?= e($pr['custom'][1]) ?></span>
-      <span class="p"><a href="<?= lurl('contact.php') ?>"><?= e($pr['custom'][2]) ?> →</a></span>
+      <span class="p"><?php if ($wa = wa_link(t('wa_msg_general'))): ?><a href="<?= e($wa) ?>" target="_blank" rel="noopener" data-wa="pricing:custom"><?= e($pr['custom'][2]) ?> →</a><?php else: ?><a href="<?= lurl('contact.php') ?>"><?= e($pr['custom'][2]) ?> →</a><?php endif; ?></span>
     </li>
   </ul>
 

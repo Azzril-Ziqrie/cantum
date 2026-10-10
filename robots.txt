@@ -4,5 +4,6 @@ Disallow: /admin/
 Disallow: /data/
 Disallow: /inc/
 Disallow: /invoice
+Disallow: /track
 
 Sitemap: https://cantum-studio.site/sitemap.xml

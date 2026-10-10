@@ -7,3 +7,6 @@ config.php
 image.png
 *.log
 .DS_Store
+
+# visit statistics (local to each server, never committed)
+data/stats.sqlite*

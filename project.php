@@ -87,6 +87,10 @@ require __DIR__ . '/inc/header.php';
     <div class="gcount" aria-hidden="true"><span class="gcn">1 / <?= count($images) ?></span><span class="gbar"><span></span></span></div>
   <?php endif; ?>
 
+  <?php if ($wa = wa_link(sprintf(t('wa_msg_project'), $p['title']))): ?>
+    <div class="plink pwa"><span class="lbl"><?= e(t('lbl_interest')) ?></span><a href="<?= e($wa) ?>" target="_blank" rel="noopener" data-wa="project:<?= e($p['slug']) ?>"><?= e(t('wa_similar')) ?> <span aria-hidden="true">↗</span></a></div>
+  <?php endif; ?>
+
   <nav class="pnav">
     <a href="<?= lurl() ?>"><?= e(t('back_all')) ?></a>
     <?php if ($next['slug'] !== $p['slug']): ?>

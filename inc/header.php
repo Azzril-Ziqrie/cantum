@@ -13,6 +13,7 @@ $canonical = abs_url((LANG === 'id' ? 'id/' : '') . ($canonicalPath ?? ''));
 $altEn = abs_url($canonicalPath ?? '');
 $altId = abs_url('id/' . ($canonicalPath ?? ''));
 $ogType = $ogType ?? 'website';
+if (http_response_code() === 200) stats_pageview(LANG . ':' . ($canonicalPath === '' ? '/' : $canonicalPath));
 $metaImage = $metaImage ?? null;
 if (!$metaImage) {   // share previews for pages without their own image: the studio's first project cover
     $first = db()->query('SELECT * FROM projects WHERE published = 1 ORDER BY sort_order ASC, year DESC, id DESC LIMIT 1')->fetch();

@@ -8,7 +8,7 @@ $err = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     check_csrf();
     if (($_POST['form'] ?? '') === 'site') {
-        foreach (['headline', 'tagline', 'about_title', 'about_text', 'email', 'phone', 'address', 'instagram', 'invoice_payment', 'invoice_terms', 'about_text_id'] as $k) {
+        foreach (['headline', 'tagline', 'about_title', 'about_text', 'email', 'phone', 'whatsapp', 'address', 'instagram', 'invoice_payment', 'invoice_terms', 'about_text_id'] as $k) {
             save_setting($k, trim($_POST[$k] ?? ''));
         }
         $msg = 'Settings saved.';
@@ -53,6 +53,7 @@ admin_head('Settings');
   <div class="cols">
     <label>Email<input type="email" name="email" value="<?= e(sv('email')) ?>"></label>
     <label>Phone<input name="phone" value="<?= e(sv('phone')) ?>"></label>
+    <label>WhatsApp<input name="whatsapp" value="<?= e(sv('whatsapp')) ?>" placeholder="0812xxxxxxx" inputmode="tel"></label>
     <label>Instagram URL<input name="instagram" value="<?= e(sv('instagram')) ?>"></label>
   </div>
   <label>Address<textarea name="address" rows="2"><?= e(sv('address')) ?></textarea></label>

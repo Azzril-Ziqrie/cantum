@@ -154,3 +154,14 @@ document.querySelectorAll('[data-pager]').forEach(function (g) {
     if (e.viewTransition && a && a.from) name(a.from.url);
   });
 })();
+
+// WhatsApp clicks are counted (no cookies, no personal data); the link itself opens as normal.
+(function () {
+  var ep = document.currentScript && document.currentScript.getAttribute('data-track');
+  if (!ep || !navigator.sendBeacon) return;
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-wa]');
+    if (!a) return;
+    navigator.sendBeacon(ep, new URLSearchParams({ s: a.getAttribute('data-wa') }));
+  });
+})();

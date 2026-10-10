@@ -17,6 +17,7 @@ function admin_head(string $title): void { ?>
     <a href="<?= url('admin/') ?>">Projects</a>
     <a href="<?= url('admin/edit.php') ?>">New project</a>
     <a href="<?= url('admin/invoices.php') ?>">Invoices</a>
+    <a href="<?= url('admin/stats.php') ?>">Stats</a>
     <a href="<?= url('admin/settings.php') ?>">Settings</a>
     <a href="<?= url() ?>" target="_blank">View site ↗</a>
     <a href="<?= url('admin/logout.php') ?>">Log out</a>

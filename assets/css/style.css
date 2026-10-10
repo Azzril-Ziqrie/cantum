@@ -346,3 +346,6 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 .plink a:hover span { transform: translate(2px, -2px); color: var(--fg); }
 @media (max-width: 640px) { .plink { grid-template-columns: 7rem 1fr; } .plink a { grid-column: auto; } }
 @media (prefers-reduced-motion: reduce) { .plink a span { transition: none; } }
+
+/* project: WhatsApp row (same rhythm as the live-site row) */
+.plink.pwa { margin: 40px 0 0; }

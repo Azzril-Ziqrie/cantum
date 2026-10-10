@@ -23,6 +23,10 @@ return [
     'lbl_studio' => 'Studio', 'lbl_email' => 'Email', 'lbl_phone' => 'Phone', 'lbl_address' => 'Address', 'lbl_instagram' => 'Instagram',
 
     'back_all' => '← All work', 'next' => 'Next: ', 'bc_work' => 'Work', 'lbl_live' => 'Live site',
+    'lbl_whatsapp' => 'WhatsApp', 'lbl_interest' => 'Your project', 'wa_similar' => 'Chat about a similar project',
+    'wa_msg_plan' => 'Hi Cantum Studio, I am interested in the %s package. Could you share more details?',
+    'wa_msg_project' => 'Hi Cantum Studio, I saw the %s project on your site and would like something similar.',
+    'wa_msg_general' => 'Hi Cantum Studio, I would like to talk about a website project.',
 
     'title_about' => 'Info & Services | Web Design Studio in Bogor',
     'desc_about' => 'About Cantum Studio, a web design studio in Bogor: company profile sites, portfolios, landing pages, online stores and SEO.',
@@ -55,7 +59,7 @@ return [
             ['Maintenance', 500000, '/ 6 months', 'Updates, backups, bug fixes, security and performance checks, and minor content changes.'],
         ],
         'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python or API integration.', 'On request'],
-        'cta' => 'Start a project →',
+        'cta' => 'Start a project →', 'cta_wa' => 'Start on WhatsApp →',
         'terms_title' => 'Terms & conditions',
         'terms' => ['50% deposit to start; final payment on completion.',
             'Extra requests may incur additional fees.', 'Domain and hosting are included.', 'You provide all required content.'],
@@ -93,6 +97,10 @@ return [
     'lbl_studio' => 'Studio', 'lbl_email' => 'Email', 'lbl_phone' => 'Telepon', 'lbl_address' => 'Alamat', 'lbl_instagram' => 'Instagram',
 
     'back_all' => '← Semua karya', 'next' => 'Berikutnya: ', 'bc_work' => 'Karya', 'lbl_live' => 'Situs',
+    'lbl_whatsapp' => 'WhatsApp', 'lbl_interest' => 'Proyekmu', 'wa_similar' => 'Diskusikan proyek serupa',
+    'wa_msg_plan' => 'Halo Cantum Studio, saya tertarik dengan paket %s. Boleh minta info lebih lanjut?',
+    'wa_msg_project' => 'Halo Cantum Studio, saya melihat proyek %s di situs kalian dan ingin yang serupa.',
+    'wa_msg_general' => 'Halo Cantum Studio, saya ingin berdiskusi tentang proyek website.',
 
     'title_about' => 'Info & Layanan | Jasa Pembuatan Website Bogor',
     'desc_about' => 'Tentang Cantum Studio, studio pembuatan website di Bogor: website company profile, portofolio, landing page, toko online, dan SEO.',
@@ -125,7 +133,7 @@ return [
             ['Maintenance', 500000, '/ 6 bulan', 'Pembaruan, backup, perbaikan bug, pengecekan keamanan dan performa, serta perubahan konten kecil.'],
         ],
         'custom' => ['Full-stack custom', 'Laravel, Node.js, React, Python, atau integrasi API.', 'Sesuai permintaan'],
-        'cta' => 'Mulai proyek →',
+        'cta' => 'Mulai proyek →', 'cta_wa' => 'Mulai via WhatsApp →',
         'terms_title' => 'Syarat & ketentuan',
         'terms' => ['DP 50% untuk memulai; pelunasan setelah selesai.',
             'Permintaan tambahan dapat dikenakan biaya.', 'Domain dan hosting sudah termasuk.', 'Kamu menyediakan seluruh konten yang dibutuhkan.'],

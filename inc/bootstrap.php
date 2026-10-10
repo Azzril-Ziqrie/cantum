@@ -10,6 +10,7 @@ if (strpos($script, '/admin/') !== false || basename($script) === 'invoice.php' 
 }
 
 define('ROOT', dirname(__DIR__));
+require_once __DIR__ . '/stats.php';
 define('UPLOAD_DIR', ROOT . '/uploads');
 
 // Base URL path of the site (works in /cantum/ or at domain root).
@@ -374,7 +375,7 @@ function org_schema(): array
         'makesOffer' => array_map(fn($n, $id) => ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => $n, 'alternateName' => $id, 'areaServed' => 'Bogor, Indonesia', 'provider' => ['@id' => abs_url('#studio')]]], SERVICES, SERVICES_ID),
     ];
     if (setting('email')) $org['email'] = setting('email');
-    if (setting('phone')) $org['telephone'] = setting('phone');
+    if (wa_phone() !== '') $org['telephone'] = '+' . wa_phone();
     return $org;
 }
 
@@ -437,4 +438,14 @@ function wa_number(string $phone): string
     if ($d === '') return '';
     if ($d[0] === '0') $d = '62' . substr($d, 1);
     return $d;
+}
+
+/** The studio's WhatsApp number (Settings > WhatsApp, falls back to Phone), international format without +. */
+function wa_phone(): string { return wa_number(setting('whatsapp') ?: setting('phone')); }
+
+/** wa.me link with a ready-made message, or '' when no number is set. */
+function wa_link(string $msg): string
+{
+    $n = wa_phone();
+    return $n === '' ? '' : 'https://wa.me/' . $n . '?text=' . rawurlencode($msg);
 }
