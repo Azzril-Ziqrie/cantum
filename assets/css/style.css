@@ -349,3 +349,11 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 
 /* project: WhatsApp row (same rhythm as the live-site row) */
 .plink.pwa { margin: 40px 0 0; }
+
+/* "Demo your website now": plain text line with a hairline arrow, above the project grid */
+.demo-line { padding: 0 0 28px; }
+.demo-line a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 0; transition: opacity .2s; }
+.demo-line a:hover { opacity: .55; }
+.demo-line svg { width: 14px; height: 10px; fill: none; stroke: currentColor; stroke-width: .8; stroke-linecap: round; stroke-linejoin: round; transition: transform .45s var(--spring); }
+.demo-line a:hover svg { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .demo-line svg, .demo-line a { transition: none; } }

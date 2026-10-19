@@ -5,5 +5,9 @@ Disallow: /data/
 Disallow: /inc/
 Disallow: /invoice
 Disallow: /track
+Disallow: /demo/dashboard
+Disallow: /demo/delete
+Disallow: /demo/ended
+Disallow: /uploads/demo/
 
 Sitemap: https://cantum-studio.site/sitemap.xml

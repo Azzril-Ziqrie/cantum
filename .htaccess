@@ -34,6 +34,11 @@ ExpiresByType application/javascript "access plus 1 year"
 Header set Cache-Control "public, max-age=31536000, immutable"
 </FilesMatch>
 Header set X-Content-Type-Options "nosniff"
+# visitor demo uploads are short-lived: never cached by browsers or proxies
+<If "%{REQUEST_URI} =~ m#/uploads/demo/#">
+Header set Cache-Control "private, no-store"
+Header unset Expires
+</If>
 </IfModule>
 
 Options -Indexes
@@ -44,6 +49,7 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
 # Indonesian version lives under /id/ (same scripts, language detected from the URL)
 RewriteRule ^id/?$ index.php [L,QSA]
+RewriteRule ^id/demo/?$ demo/index.php [L,QSA]
 RewriteRule ^id/(about|contact|index-list|pricing|project)(\.php)?/?$ $1.php [L,QSA]
 
 # internal code is never served over HTTP

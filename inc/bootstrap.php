@@ -15,7 +15,7 @@ define('UPLOAD_DIR', ROOT . '/uploads');
 
 // Base URL path of the site (works in /cantum/ or at domain root).
 $base = rtrim(str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME']))), '/');
-if (basename(dirname($_SERVER['SCRIPT_NAME'])) !== 'admin') {
+if (!in_array(basename(dirname($_SERVER['SCRIPT_NAME'])), ['admin', 'demo'], true)) {
     $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 }
 define('BASE', $base);

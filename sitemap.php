@@ -8,6 +8,7 @@ $latest = db()->query('SELECT MAX(created_at) FROM projects WHERE published = 1'
 $pages = [
     ['', max($mod('index.php'), substr((string)$latest, 0, 10)), '1.0', [], ''],
     ['about.php', $mod('about.php'), '0.8', [], ''],
+    ['demo/', $mod('demo/index.php'), '0.8', [], ''],
     ['pricing.php', $mod('pricing.php'), '0.8', [], ''],
     ['index-list.php', $mod('index-list.php'), '0.7', [], ''],
     ['contact.php', $mod('contact.php'), '0.7', [], ''],

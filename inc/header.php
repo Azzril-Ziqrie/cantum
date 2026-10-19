@@ -70,6 +70,7 @@ $schemas = array_merge([org_schema(), [
     <a href="<?= lurl('about.php') ?>"><?= e(t('nav_info')) ?></a>
     <a href="<?= lurl('index-list.php') ?>"><?= e(t('nav_index')) ?></a>
     <span class="end">
+      <a href="<?= lurl('demo/') ?>" data-demo-open><?= e(t('nav_demo')) ?></a>
       <a href="<?= lurl('pricing.php') ?>"><?= e(t('nav_pricing')) ?></a>
       <a href="<?= lurl('contact.php') ?>"><?= e(t('nav_contact')) ?></a>
     </span>

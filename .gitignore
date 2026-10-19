@@ -10,3 +10,9 @@ image.png
 
 # visit statistics (local to each server, never committed)
 data/stats.sqlite*
+# live demos (generated per visitor, never committed)
+data/demos/
+uploads/demo/
+
+# separate client project with its own repo and secrets, never part of this site
+simple/
