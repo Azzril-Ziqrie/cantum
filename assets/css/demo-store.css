@@ -196,7 +196,13 @@ html.no-tips .tip-dot { display: none; }
 .js .rv { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .js .rv.in { opacity: 1; transform: none; }
 
-@media (max-width: 600px) { .dbar { padding: 6px 12px; } .wa-pill { right: 10px; bottom: 10px; padding: 9px 14px; } .menu-nav > a, .dropdown-toggle, .dropdown-menu a { font-size: 20px; } }
+@media (max-width: 600px) {
+  .dbar { padding: 8px 12px; gap: 8px 12px; }
+  .dbar-layouts { flex: 1 0 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 3px; border-radius: var(--r-pill); background: rgba(0, 0, 0, .06); }
+  .dbar-layouts a { padding: 7px 0; text-align: center; }
+  .dbar-r { flex: 1 0 100%; justify-content: space-between; }
+}
+@media (max-width: 600px) { .wa-pill { right: 10px; bottom: 10px; padding: 9px 14px; } .menu-nav > a, .dropdown-toggle, .dropdown-menu a { font-size: 20px; } }
 @media (prefers-reduced-motion: reduce) {
   .tip-dot, .tip-pop, .dd-panel, .cart-item { animation: none; }
   .js .rv { opacity: 1; transform: none; transition: none; }

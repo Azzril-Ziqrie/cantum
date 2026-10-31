@@ -84,6 +84,11 @@ $demoAutoOpen = true;
 $fullTitle = t('title_demo');
 $metaDesc = t('desc_demo');
 $canonicalPath = 'demo/';
+$jsonLd = [[
+    '@context' => 'https://schema.org', '@type' => 'WebPage', 'name' => t('title_demo'), 'description' => t('desc_demo'),
+    'url' => abs_url(LANG === 'id' ? 'id/demo/' : 'demo/'), 'inLanguage' => LANG,
+    'isPartOf' => ['@id' => abs_url('#website')], 'about' => ['@id' => abs_url('#studio')],
+]];
 $active = 'demo';
 require __DIR__ . '/../inc/header.php';
 ?>
