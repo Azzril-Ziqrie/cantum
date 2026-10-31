@@ -50,10 +50,13 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 # Indonesian version lives under /id/ (same scripts, language detected from the URL)
 RewriteRule ^id/?$ index.php [L,QSA]
 RewriteRule ^id/demo/?$ demo/index.php [L,QSA]
-RewriteRule ^id/(about|contact|index-list|pricing|project)(\.php)?/?$ $1.php [L,QSA]
+RewriteRule ^id/(about|contact|index-list|pricing|project|cantumdine)(\.php)?/?$ $1.php [L,QSA]
 
 # internal code is never served over HTTP
 RewriteRule ^inc/ - [F,L]
+
+# the CantumDine-IN working folder (goal.md, sales deck, video source) is never served over HTTP
+RewriteRule ^CantumDine-IN(/|$) - [F,NC,L]
 
 # clean URLs: /about → about.php, /admin/login → admin/login.php (real files and folders are left alone)
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -4,6 +4,7 @@ $projects = $projects ?? db()->query('SELECT * FROM projects WHERE published = 1
 $total = count($projects);
 ?>
 <p class="demo-line"><a href="<?= lurl('demo/') ?>" data-demo-open><?= e(t('demo_cta')) ?> <svg viewBox="0 0 14 10" aria-hidden="true"><path d="M0 5h13M9 1l4 4-4 4"/></svg></a></p>
+<p class="demo-line demo-line--next"><a href="<?= lurl('cantumdine.php') ?>"><?= e(t('cd_cta')) ?> <svg viewBox="0 0 14 10" aria-hidden="true"><path d="M0 5h13M9 1l4 4-4 4"/></svg></a></p>
 <?php if (!$projects): ?>
   <p class="empty"><?= e(t('empty_projects')) ?></p>
 <?php else: ?>
