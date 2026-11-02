@@ -119,17 +119,21 @@
 
   function ping(text, btn, list) {
     if (!toast || !panel || !btn) return;
-    var sp = btn.querySelector('.cd-sprite').getBoundingClientRect(), pr = panel.getBoundingClientRect();
-    var x = sp.left + sp.width / 2 - pr.left, y = sp.top - pr.top - 2;       // just above the table top
-    x = Math.max(40, Math.min(pr.width - 270, x));                              // keep the bubble inside the panel
-    y = Math.max(130, y);
-    toast.style.left = x + 'px'; toast.style.top = y + 'px';
+    // measure the floor tile, not the sprite: the sprite is still falling in when the order lands
+    var pad = btn.querySelector('.cd-pad').getBoundingClientRect(), pr = panel.getBoundingClientRect();
+    var tx = pad.left + pad.width / 2 - pr.left;
+    var y = Math.max(112, pad.top + pad.height / 2 - pr.top - btn.querySelector('.cd-sprite').offsetHeight - 4);   // just above the standing table
+    toast.style.top = y + 'px';
     if (sWord) sWord.textContent = says.length ? says[sayIx++ % says.length] : text;
     if (sItems) {                                              // the table reads out what was ordered
       sItems.textContent = '';
       (list || []).forEach(function (it) { var li = document.createElement('li'); li.textContent = it; sItems.appendChild(li); });
     }
     if (sText) sText.textContent = text + ': ' + (list || []).join(', ');
+    var bw = toast.querySelector('.bubble').offsetWidth || 220;                  // keep the whole bubble inside the panel
+    var bl = Math.max(8, Math.min(pr.width - bw - 8, tx - 28));
+    toast.style.left = (bl + 28) + 'px';
+    toast.style.setProperty('--tail', Math.max(14, Math.min(bw - 30, tx - bl - 6)) + 'px');
     clearTimeout(toastTimer); clearTimeout(typeTimer);
     toast.classList.remove('is-on', 'is-out', 'is-typing'); void toast.offsetWidth;   // restart from scratch
     toast.classList.add('is-on');
@@ -201,4 +205,99 @@
     entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
   els.forEach(function (el) { io.observe(el); });
+})();
+
+// a string hangs from the hero logo down to the service icons; it is measured from the real layout, so it follows any screen size
+(function () {
+  var main = document.querySelector('main'), tile = document.querySelector('.cd-tile');
+  var icons = Array.prototype.slice.call(document.querySelectorAll('.cd-sol-ic'));
+  if (!main || !tile || !icons.length || !('createElementNS' in document)) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'cd-string'); svg.setAttribute('aria-hidden', 'true');
+  main.insertBefore(svg, main.firstChild);
+
+  var started = false, still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw() {
+    var m = main.getBoundingClientRect(), t = tile.getBoundingClientRect();
+    var x0 = t.left + t.width / 2 - m.left, y0 = t.top + t.height - m.top;
+    var small = window.matchMedia('(max-width: 760px)').matches;
+    var lines = '', dots = '', kx = x0, ky = y0;
+    function add(d, i) {
+      lines += '<path pathLength="1" style="--k:' + i + '" d="' + d + '"/>';
+      if (!still) dots += '<circle class="pulse" r="3.5" style="--k:' + i + '"><animateMotion dur="' + (3.4 + i * .5) + 's" begin="' + (2.4 + i * .45) + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1" path="' + d + '"/></circle>';
+    }
+    if (small) {
+      // phone: one trunk leaves the logo sideways and runs down the left margin (never crossing the text),
+      // and a branch curls off it into every service icon, so all of them are connected
+      kx = t.left - m.left; ky = t.top + t.height / 2 - m.top;
+      var pts = icons.map(function (ic) {
+        var r = ic.getBoundingClientRect();
+        return { x: r.left + r.width / 2 - m.left, y: r.top + r.height / 2 - m.top };
+      });
+      var last = pts[pts.length - 1];
+      if (pts[0].y > ky + 140) {
+        add('M' + kx + ' ' + ky + ' C' + (kx - 34) + ' ' + ky + ' 9 ' + ky + ' 9 ' + (ky + 70) + ' L9 ' + (last.y - 60), 0);
+        pts.forEach(function (q, i) {
+          add('M9 ' + (q.y - 60) + ' C9 ' + q.y + ' ' + (q.x - 90) + ' ' + q.y + ' ' + (q.x - 33) + ' ' + q.y, i + 3);
+        });
+      }
+    } else {
+      icons.forEach(function (ic, i) {
+        var r = ic.getBoundingClientRect(), x1 = r.left + r.width / 2 - m.left, y1 = r.top - m.top, dy = y1 - y0;
+        if (dy <= 0) return;
+        add('M' + x0 + ' ' + y0 + ' C' + x0 + ' ' + (y0 + dy * .72) + ' ' + x1 + ' ' + (y1 - dy * .26) + ' ' + x1 + ' ' + y1, i);
+      });
+    }
+    svg.setAttribute('viewBox', '0 0 ' + m.width + ' ' + m.height);
+    svg.innerHTML = lines + dots + '<circle class="knot" cx="' + kx + '" cy="' + ky + '" r="4.5"/>';
+    if (started) svg.classList.add('is-on');
+  }
+  // the first draw waits for the hero entrance, so the string grows out of the logo once it has settled
+  function start() {
+    if (started) return;
+    started = true; draw(); void svg.getBoundingClientRect();
+    requestAnimationFrame(function () { svg.classList.add('is-on'); });
+  }
+  var raf = 0;
+  function soon() { cancelAnimationFrame(raf); raf = requestAnimationFrame(draw); }
+  window.addEventListener('resize', soon);
+  window.addEventListener('load', function () { soon(); setTimeout(start, 2600); });
+  tile.addEventListener('animationend', function () { soon(); setTimeout(start, 400); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(soon);
+  if ('ResizeObserver' in window) new ResizeObserver(soon).observe(main);
+  soon();
+})();
+
+// phone: page dots under the swipeable feature cards (they follow the scroll, and a tap moves there)
+(function () {
+  var row = document.querySelector('.cd-feat');
+  if (!row) return;
+  var cards = Array.prototype.slice.call(row.children);
+  var dots = document.createElement('div');
+  dots.className = 'cd-feat-dots'; dots.setAttribute('aria-hidden', 'true');
+  cards.forEach(function (card, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.tabIndex = -1;
+    b.addEventListener('click', function () {
+      var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      row.scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft), behavior: smooth ? 'smooth' : 'auto' });
+    });
+    dots.appendChild(b);
+  });
+  row.parentNode.insertBefore(dots, row.nextSibling);
+  var buttons = dots.children, cur = -1;
+  function sync() {
+    var pad = parseFloat(getComputedStyle(row).paddingLeft) || 0, best = 0, dist = 1e9;
+    cards.forEach(function (card, i) {
+      var d = Math.abs(card.offsetLeft - pad - row.scrollLeft);
+      if (d < dist) { dist = d; best = i; }
+    });
+    if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 4) best = cards.length - 1;   // the last card can never reach the start edge
+    if (best === cur) return;
+    cur = best;
+    Array.prototype.forEach.call(buttons, function (b, i) { b.classList.toggle('is-on', i === best); });
+  }
+  row.addEventListener('scroll', function () { requestAnimationFrame(sync); }, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
 })();

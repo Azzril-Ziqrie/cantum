@@ -90,22 +90,7 @@ $m = $cd['mini'];
 
   <main>
     <section class="cd-hero">
-      <aside class="fc fc-note" aria-hidden="true"><span class="pin"></span><p><?= e($cd['note']) ?></p></aside>
-      <aside class="fc fc-wait" aria-hidden="true">
-        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="#fff" stroke="#0b0b0b" stroke-width="2.5"/><path d="M20 11v9l6 4" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/></svg>
-        <div><b><?= e($cd['wait_title']) ?></b><span><?= e($cd['wait_text']) ?></span></div>
-      </aside>
-      <aside class="fc fc-orders" aria-hidden="true">
-        <b><?= e($cd['orders_title']) ?></b>
-        <?php foreach ($cd['orders'] as [$tb, $what, $pct, $st]): ?>
-          <div class="ord"><span><?= e($tb) ?> · <?= e($what) ?></span><i><u style="width:<?= (int)$pct ?>%"></u></i><em><?= e($st) ?> <?= (int)$pct ?>%</em></div>
-        <?php endforeach; ?>
-      </aside>
-      <aside class="fc fc-pay" aria-hidden="true">
-        <b><?= e($cd['pay_title']) ?></b>
-        <div><?php foreach ($cd['pay'] as $pm): ?><span><?= e($pm) ?></span><?php endforeach; ?></div>
-      </aside>
-
+      <canvas class="cd-topo" aria-hidden="true"></canvas>
       <div class="cd-hero-in">
         <span class="cd-tile" data-in style="--i:0"><img src="<?= e($logo) ?>" width="480" height="378" alt=""></span>
         <h1 class="cd-h1" data-in style="--i:1"><?= e($cd['h1a']) ?><br><span><?= e($cd['h1b']) ?></span></h1>
@@ -120,7 +105,7 @@ $m = $cd['mini'];
       <div class="cd-head rv"><span class="cd-pill"><?= e($cd['sol_pill']) ?></span><h2><?= e($cd['sol_h']) ?></h2></div>
       <p class="cd-allsol rv"><a class="cd-link" href="<?= lurl('cantum-onepay-solutions.php') ?>"><?= e($cd['sol_all']) ?> <?= $arrow ?></a></p>
       <div class="cd-sol rv">
-        <?php foreach ($cd['sol'] as $i => $txt): ?><div><?= $icons[$i] ?><p><?= e($txt) ?></p></div><?php endforeach; ?>
+        <?php foreach ($cd['sol'] as $i => $txt): ?><div><span class="cd-sol-ic"><?= $icons[$i] ?></span><p><?= e($txt) ?></p></div><?php endforeach; ?>
       </div>
 
       <div class="cd-panel rv" aria-label="<?= e($cd['stage_label']) ?>">
@@ -233,6 +218,7 @@ $m = $cd['mini'];
 <script src="<?= e($asset('js/dither.js')) ?>" defer></script>
 <script src="<?= e($asset('js/cantumdine-loader.js')) ?>" defer></script>
 <script src="<?= e($asset('js/cantumdine.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantumdine-topo.js')) ?>" defer></script>
 <script src="<?= e($asset('js/cantumdine-menu.js')) ?>" defer></script>
 <script src="<?= e($asset('js/main.js')) ?>" data-track="<?= e(url('track.php')) ?>" defer></script>
 </body>
