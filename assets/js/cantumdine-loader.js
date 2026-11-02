@@ -1,4 +1,4 @@
-// CantumDine-IN loading screen: counts 1 to 100 over 3 seconds while the table drawing fills with dither
+// Cantum OnePay loading screen: counts 1 to 100 over 3 seconds while the table drawing fills with dither
 // (assets/js/dither.js), then lifts away and lets the hero animate in. Reduced motion skips it.
 (function () {
   var root = document.documentElement;

@@ -1,4 +1,4 @@
-// CantumDine-IN landing: a sample floor plan that behaves like the real dashboard.
+// Cantum OnePay landing: a sample floor plan that behaves like the real dashboard.
 //  - tap a table to read its order (works without JS: table 4 is rendered into the page)
 //  - while on screen, new paid orders keep "arriving": a free table gets an order, the table drops in with a ping and
 //    a speech bubble from the table, then the order moves on by itself (new -> preparing -> served -> free), like staff working through it.
