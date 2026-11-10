@@ -21,7 +21,8 @@ $total = count($projects);
     <a class="card <?= $cls ?> reveal" data-vt="p-<?= (int)$p['id'] ?>" href="<?= lurl('project.php?slug=' . urlencode($p['slug'])) ?>">
       <div class="thumb">
         <?php if ($cover): ?>
-          <img src="<?= upload_url($cover) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>" loading="lazy">
+          <?php if (is_video($cover)): ?><video src="<?= upload_url($cover) ?>" muted loop autoplay playsinline preload="metadata"></video>
+          <?php else: ?><img src="<?= upload_url($cover) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>" loading="lazy"><?php endif; ?>
         <?php else: ?>
           <div class="ph"></div>
         <?php endif; ?>

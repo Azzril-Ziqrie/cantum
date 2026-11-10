@@ -37,7 +37,7 @@ $ogType = 'article';
 $cv = project_cover($p);
 $link = trim((string)($p['link'] ?? ''));
 $linkHost = $link !== '' ? preg_replace('/^www\./', '', (string)parse_url($link, PHP_URL_HOST)) . rtrim((string)parse_url($link, PHP_URL_PATH), '/') : '';
-$metaImage = $cv ? abs_url('uploads/' . $cv) : null;
+$metaImage = ($cv && !is_video($cv)) ? abs_url('uploads/' . $cv) : null;
 $jsonLd = [[
     '@context' => 'https://schema.org', '@type' => 'CreativeWork', 'inLanguage' => LANG,
     'name' => $p['title'], 'url' => $pageUrl, 'description' => $metaDesc,
@@ -45,7 +45,7 @@ $jsonLd = [[
     'locationCreated' => $p['location'] ?: null,
     'sameAs' => $link ?: null,
     'creator' => ['@id' => abs_url('#studio')],
-    'image' => array_map(fn($im) => abs_url('uploads/' . $im['filename']), $images),
+    'image' => array_map(fn($im) => abs_url('uploads/' . $im['filename']), array_values(array_filter($images, fn($im) => !is_video($im['filename'])))),
 ], [
     '@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => [
         ['@type' => 'ListItem', 'position' => 1, 'name' => t('bc_work'), 'item' => abs_url(LANG === 'id' ? 'id/' : '')],
@@ -80,7 +80,7 @@ require __DIR__ . '/inc/header.php';
             $cls = $r > 1.2 ? 'l' : ($r < 0.9 ? 'p' : 'm');
         }
     ?>
-      <figure class="<?= $cls . ($k === 0 ? '' : ' reveal') ?>"<?= $k === 0 ? ' style="view-transition-name:p-' . (int)$p['id'] . '"' : '' ?>><img src="<?= upload_url($im['filename']) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>"<?= $k === 0 ? '' : ' loading="lazy"' ?>></figure>
+      <figure class="<?= $cls . ($k === 0 ? '' : ' reveal') ?>"<?= $k === 0 ? ' style="view-transition-name:p-' . (int)$p['id'] . '"' : '' ?>><?php if (is_video($im['filename'])): ?><video src="<?= upload_url($im['filename']) ?>" controls playsinline preload="metadata" style="width:100%;height:auto"></video><?php else: ?><img src="<?= upload_url($im['filename']) ?>" width="<?= $w ?>" height="<?= $h ?>" alt="<?= e($p['title']) ?>"<?= $k === 0 ? '' : ' loading="lazy"' ?>><?php endif; ?></figure>
     <?php endforeach; ?>
   </div>
   <?php if (count($images) > 1): ?>
