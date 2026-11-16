@@ -1,0 +1,25 @@
+// Rekam alter-that.com: bola masuk/keluar, buka menu +, Articles, klik artikel, scroll detail.
+import {openSession, sleep, moveTo, click, scrollBy, finish} from './lib.mjs';
+const s = await openSession({name: 'full', start: [900, 300]});
+const {page} = s;
+await page.goto('https://alter-that.com/', {waitUntil: 'load'});
+await sleep(7000);
+await moveTo(s, 720, 440, {ms: 500, overshoot: false});
+await s.startRec();
+const t0 = Date.now(); const mark = (n) => console.log(((Date.now() - t0) / 1000).toFixed(1), n);
+await sleep(1800); mark('in');
+await scrollBy(s, -2600, {ms: 3200});
+await sleep(1400); mark('out');
+await scrollBy(s, 2600, {ms: 3200});
+await sleep(1600); mark('menu');
+await click(s, page.locator('text=+').last(), {after: 900});
+await click(s, page.getByText('Articles', {exact: true}).first(), {after: 600}); await page.waitForLoadState('load'); await sleep(2500); mark('articles');
+await click(s, page.locator('a', {hasText: /louis kahn/i}).first(), {after: 600}); await page.waitForLoadState('load'); await sleep(2200); mark('detail1');
+await scrollBy(s, 700, {ms: 1400}); await sleep(900);
+await scrollBy(s, 900, {ms: 1600}); await sleep(900); mark('scrolled');
+await scrollBy(s, -1600, {ms: 1400}); await sleep(600);
+await click(s, page.locator('text=+').last(), {after: 800});
+await click(s, page.getByText('Articles', {exact: true}).first(), {after: 600}); await page.waitForLoadState('load'); await sleep(2500); mark('articles2');
+await click(s, page.locator('a', {hasText: /bordeaux/i}).first(), {after: 600}); await page.waitForLoadState('load'); await sleep(2200); mark('detail2');
+await scrollBy(s, 800, {ms: 1500}); await sleep(1200); mark('end');
+await finish(s);

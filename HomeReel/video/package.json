@@ -1,0 +1,20 @@
+{
+  "name": "cantum-home-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cantum Studio home page reel (Remotion), 9:16",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts HomeReel out/home-reel.mp4",
+    "still": "remotion still src/index.ts HomeReel out/frame.png --frame=170",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.539",
+    "typescript": "^7.0.2"
+  }
+}

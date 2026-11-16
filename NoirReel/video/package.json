@@ -1,0 +1,26 @@
+{
+  "name": "cantum-noir-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Noirlab website preview for the Cantum Studio portfolio, 16:9, no audio",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts NoirReel out/noir-reel.mp4 --muted",
+    "render:4x5": "remotion render src/index.ts NoirReel45 out/noir-reel-4x5.mp4 --muted",
+    "render:4x3": "remotion render src/index.ts NoirReel43 out/noir-reel-4x3.mp4 --muted",
+    "still": "remotion still src/index.ts NoirReel out/frame.png --frame=170",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.539",
+    "typescript": "^7.0.2"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0",
+    "qrcode": "^1.5.4"
+  }
+}

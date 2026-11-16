@@ -52,7 +52,7 @@ $nav = [[$cd['nav'][0][0], lurl($canonicalPath)], [$cd['nav'][1][0], $product . 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap">
-<link rel="stylesheet" href="<?= e($asset('css/cantumdine.css')) ?>">
+<link rel="stylesheet" href="<?= e($asset('css/cantum-onepay.css')) ?>">
 <?= json_ld($schemas) ?>
 </head>
 <body class="cs-page">
@@ -111,7 +111,7 @@ $nav = [[$cd['nav'][0][0], lurl($canonicalPath)], [$cd['nav'][1][0], $product . 
     <span><a href="<?= e($product) ?>">Cantum OnePay</a> · <a href="<?= lurl() ?>"><?= e($cd['back']) ?></a> · <a href="<?= e($otherLang) ?>" hreflang="<?= LANG === 'id' ? 'en' : 'id' ?>"><?= e($cd['lang_label']) ?></a></span>
   </footer>
 </div>
-<script src="<?= e($asset('js/cantumdine-menu.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantum-onepay-menu.js')) ?>" defer></script>
 <script src="<?= e($asset('js/main.js')) ?>" data-track="<?= e(url('track.php')) ?>" defer></script>
 </body>
 </html>

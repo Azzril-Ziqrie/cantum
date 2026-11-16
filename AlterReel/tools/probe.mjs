@@ -1,0 +1,11 @@
+import {chromium} from 'playwright-core';
+const b = await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--hide-scrollbars','--use-gl=angle','--use-angle=gl','--ignore-gpu-blocklist']});
+const p = await (await b.newContext({viewport:{width:1440,height:936}})).newPage();
+await p.goto('https://alter-that.com/',{waitUntil:'load'}); await p.waitForTimeout(4000);
+await p.mouse.move(1402,918); await p.mouse.click(1402,918); await p.waitForTimeout(1200);
+await p.screenshot({path:'/tmp/claude-1000/-opt-lampp-htdocs-cantum/401c0203-4ade-4e49-87be-34e5409675e3/scratchpad/p1.png'});
+await p.getByText('Articles',{exact:true}).first().click(); await p.waitForLoadState('load'); await p.waitForTimeout(2500);
+console.log(p.url());
+await p.screenshot({path:'/tmp/claude-1000/-opt-lampp-htdocs-cantum/401c0203-4ade-4e49-87be-34e5409675e3/scratchpad/p2.png'});
+const links = await p.$$eval('a',a=>a.map(x=>x.href+' | '+x.innerText.slice(0,40)).slice(0,15)); console.log(links.join('\n'));
+await b.close();
