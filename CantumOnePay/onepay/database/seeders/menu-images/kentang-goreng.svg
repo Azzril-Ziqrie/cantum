@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Kentang goreng">
+  <rect width="512" height="512" fill="#e8edf8"/>
+  <circle cx="256" cy="268" r="196" fill="#d6dff2"/>
+  <g fill="#ffffff" stroke="#0a1f4d" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M178 250l-16-120 36-4 14 124z"/><path d="M216 246l-2-140 38-2 6 140z"/><path d="M262 246l14-132 36 8-18 126z"/>
+    <path d="M298 252l36-110 34 16-40 108z"/><path d="M150 262l-48-96 30-20 62 110z"/><path d="M330 262l66-86 28 24-74 82z"/>
+  </g>
+  <path d="M136 250h240l-30 190a22 22 0 0 1-22 18H188a22 22 0 0 1-22-18z" fill="#0a1f4d" stroke="#0a1f4d" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M136 250h240l-6 38H142z" fill="#ffffff" opacity=".95"/>
+  <path d="M256 322l26 28-26 28-26-28z" fill="#9fb0d4"/>
+  <ellipse cx="256" cy="476" rx="112" ry="11" fill="#0a1f4d" opacity=".12"/>
+</svg>

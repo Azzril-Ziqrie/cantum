@@ -1,0 +1,58 @@
+/* Layar dapur/bar, halaman refund, dan tambahan dashboard (status "siap disajikan", menu habis). Monokrom, mono. */
+
+/* status meja "siap disajikan": bingkai ganda + tanda centang, beda dari "disajikan" yang pudar */
+.dot--ready { background: #fff; border-width: 3px; }
+.tbl--ready { background: #fff; border-width: 4px; border-style: double; }
+.tbl--ready::after { content: "✓"; position: absolute; top: 4px; right: 8px; font-size: 14px; }
+.chip.status-ready { background: #fff; box-shadow: 0 0 0 1.5px var(--accent) inset; }
+
+.link-inline { text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
+.order-mini .request { padding: 10px 12px; border-radius: 14px; background: var(--chip); font-size: 13px; }
+.order-mini .request b { display: block; }
+
+/* tombol menu habis */
+.soldout { margin-top: 28px; }
+.search { height: 40px; min-width: 180px; padding: 0 16px; border: 0; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px var(--line) inset; }
+.menu-toggles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+.menu-toggles li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px var(--line) inset; }
+.menu-toggles li.is-out { background: var(--chip); color: var(--muted); }
+.menu-toggles li.is-out .name { text-decoration: line-through; }
+.menu-toggles small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+
+/* layar dapur/bar */
+.station-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.station-tabs a { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 999px; background: var(--chip); transition: transform .4s var(--spring); }
+.station-tabs a:active { transform: scale(.95); transition-duration: .08s; }
+.station-tabs a[aria-current="page"] { background: var(--accent); color: #fff; }
+.tickets { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; align-items: start; }
+.ticket { background: #fff; border-radius: 22px; padding: 18px; box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0,0,0,.04); }
+.ticket.is-new { animation: arrive 1.6s var(--spring); box-shadow: 0 0 0 2px var(--accent); }
+.ticket.is-late { box-shadow: 0 0 0 2px var(--warn); }
+.ticket .table-no { font-size: 2.6rem; letter-spacing: -.06em; line-height: 1; }
+.ticket-lines { margin: 14px 0 0; }
+.ticket-line { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.ticket-line .what { font-size: 1.05rem; }
+.ticket-line small { display: block; color: var(--muted); }
+.ticket-line.is-ready .what { color: var(--muted); text-decoration: line-through; }
+.prep-btn { height: 44px; min-width: 96px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; cursor: pointer; transition: transform .4s var(--spring), background .2s; -webkit-tap-highlight-color: transparent; }
+.prep-btn:active { transform: scale(.94); transition-duration: .08s; }
+.prep-btn--making { background: #cfcfcf; color: var(--fg); }
+.prep-btn--ready { background: transparent; color: var(--muted); box-shadow: 0 0 0 1px var(--line) inset; }
+
+/* halaman refund */
+.refund-grid { display: grid; gap: 14px; }
+.refund-row { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: center; }
+.refund-row .meta { color: var(--muted); font-size: 13px; }
+.refund-row .actions { grid-column: 1 / -1; }
+.empty { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket.is-new { animation: none; }
+  .prep-btn, .station-tabs a { transition: background .2s; }
+}
+@media (prefers-contrast: more) { .ticket, .menu-toggles li { box-shadow: 0 0 0 1px var(--accent) inset; } }
+
+/* chip aturan khusus cabang di dashboard */
+.rule-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+.rule-chips[hidden] { display: none; }
+.rule-chips .chip { background: var(--accent-soft); color: var(--accent); }

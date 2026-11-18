@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Nasi goreng">
+  <rect width="512" height="512" fill="#e8edf8"/>
+  <circle cx="256" cy="268" r="196" fill="#d6dff2"/>
+  <ellipse cx="256" cy="300" rx="200" ry="130" fill="#ffffff" stroke="#0a1f4d" stroke-width="12"/>
+  <ellipse cx="256" cy="300" rx="150" ry="94" fill="#f6f8fc" stroke="#9fb0d4" stroke-width="6"/>
+  <path d="M130 300c0-70 56-112 126-112s126 42 126 112c0 22-60 40-126 40s-126-18-126-40z" fill="#0a1f4d"/>
+  <g fill="#2f4a8a"><circle cx="180" cy="286" r="9"/><circle cx="220" cy="262" r="9"/><circle cx="262" cy="278" r="9"/><circle cx="300" cy="256" r="9"/><circle cx="332" cy="292" r="9"/><circle cx="244" cy="316" r="9"/><circle cx="290" cy="320" r="9"/><circle cx="206" cy="318" r="9"/></g>
+  <g fill="#9fb0d4"><circle cx="200" cy="296" r="7"/><circle cx="240" cy="290" r="7"/><circle cx="278" cy="300" r="7"/><circle cx="316" cy="276" r="7"/></g>
+  <path d="M196 220c8-34 54-46 84-30 26 12 42 8 54 28 8 16-6 34-30 38-26 4-34 16-62 12-34-4-58-24-46-48z" fill="#ffffff" stroke="#0a1f4d" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="262" cy="226" r="26" fill="#9fb0d4" stroke="#0a1f4d" stroke-width="8"/>
+  <circle cx="255" cy="219" r="7" fill="#ffffff"/>
+  <g fill="#ffffff" stroke="#0a1f4d" stroke-width="7"><circle cx="372" cy="372" r="24"/><circle cx="408" cy="344" r="24"/></g>
+  <circle cx="372" cy="372" r="9" fill="#0a1f4d"/><circle cx="408" cy="344" r="9" fill="#0a1f4d"/>
+</svg>

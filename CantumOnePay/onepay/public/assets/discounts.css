@@ -1,0 +1,43 @@
+/* Admin diskon dan promo: tabel daftar dan formulir. Memakai token dari app.css. */
+.disc-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.disc-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 14px; }
+.disc-table th { text-align: left; font-weight: 400; padding: 0 14px; text-transform: uppercase; letter-spacing: .04em; font-size: 12px; color: var(--muted); }
+.disc-table td { padding: 14px; background: #fff; vertical-align: top; }
+.disc-table td:first-child { border-radius: 18px 0 0 18px; }
+.disc-table td:last-child { border-radius: 0 18px 18px 0; }
+.disc-table small { display: block; color: var(--muted); margin-top: 2px; }
+.disc-table .code { font-size: 13px; letter-spacing: .04em; }
+.disc-actions { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.disc-actions form { display: inline; }
+.chip--off { background: transparent; box-shadow: 0 0 0 1px var(--line) inset; color: var(--muted); }
+
+.disc-form { display: grid; gap: 16px; max-width: 860px; }
+.disc-form fieldset { border: 0; display: grid; gap: 12px; padding: 20px; border-radius: 22px; background: #fff; box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0,0,0,.04); }
+.disc-form legend { float: left; width: 100%; margin-bottom: 4px; font-size: 1.15rem; letter-spacing: -.05em; }
+.disc-form legend + * { clear: both; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.errors { color: var(--warn); font-size: 13px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills label { position: relative; }
+.pills input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.pills span { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; background: var(--chip); font-size: 14px; transition: background .2s, color .2s, transform .4s var(--spring); }
+.pills input:checked + span { background: var(--accent); color: #fff; }
+.pills input:active + span { transform: scale(.96); transition-duration: .08s; }
+.pills input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
+.target-list { display: grid; gap: 6px; max-height: 260px; overflow: auto; padding: 4px; }
+.target-list label { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: var(--bg); cursor: pointer; }
+.target-list input { accent-color: var(--accent); width: 18px; height: 18px; }
+.check { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.check input { accent-color: var(--accent); width: 18px; height: 18px; }
+[data-when][hidden] { display: none; }
+
+@media (max-width: 760px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .disc-table thead { display: none; }
+  .disc-table, .disc-table tbody, .disc-table tr, .disc-table td { display: block; }
+  .disc-table tr { margin-bottom: 10px; background: #fff; border-radius: 18px; }
+  .disc-table td { background: transparent; padding: 8px 16px; }
+  .disc-table td:first-child { padding-top: 16px; } .disc-table td:last-child { padding-bottom: 16px; }
+  .disc-actions { justify-content: flex-start; }
+}

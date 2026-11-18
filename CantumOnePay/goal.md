@@ -158,7 +158,7 @@ Matriks ini draft dan bisa diubah. Setiap perubahan stok, harga, jadwal, dan ref
 - Laba rugi sederhana per cabang, dan perbandingan antar cabang untuk owner.
 
 ## Keputusan teknis (sementara)
-- Stack: PHP + MySQL (jalan di hosting biasa/XAMPP).
+- Stack: **Laravel 12** (PHP 8.2+) + MySQL, kode di folder `onepay/`. Target hosting: Hostinger (butuh SSH untuk Composer, dan cron `php artisan schedule:run` tiap menit). Tes: `php artisan test`.
 - Realtime: **polling AJAX** 2-3 detik per cabang. SSE atau WebSocket bisa menyusul bila perlu.
 - Satu kode dasar untuk semua klien. Perbedaan klien (nama, logo, warna, gateway) lewat konfigurasi, bukan kode yang diubah.
 - Webhook harus idempotent dan memverifikasi signature.

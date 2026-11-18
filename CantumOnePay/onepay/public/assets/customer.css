@@ -1,0 +1,20 @@
+/* Halaman pelanggan (HP 375px dulu): target sentuh >= 44px untuk aksi utama, info cabang, dan empty state. */
+.brand-tagline { margin: 0 0 14px; }
+.info-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.chip--open { background: var(--accent); color: var(--on-accent, #fff); }
+.chip--closed { background: #fdecea; color: #8f1d16; }
+.empty-state { text-align: left; }
+
+.menu-item .add, .cartbar .btn, .sheet .btn, .btn--block { min-height: 44px; }
+.menu-item .add { padding: 0 22px; }
+.qty button { width: 44px; height: 44px; }
+.sheet .note, .sheet input[type="text"], .sheet input:not([type]), .sheet input[type="search"] { min-height: 44px; }
+.opt { min-height: 48px; }
+.menu-item h3, .menu-item p { overflow-wrap: anywhere; }
+
+@media (max-width: 420px) {
+  .wrap { width: calc(100% - 32px); }
+  .pay-amount { overflow-wrap: anywhere; }
+  .methods { grid-template-columns: 1fr; }
+  .bar { width: calc(100% - 16px); }
+}

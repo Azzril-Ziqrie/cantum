@@ -1,0 +1,10 @@
+/* Progres pesanan di halaman pelanggan: empat tahap setelah bayar. Monokrom, tahap aktif diberi penanda berdenyut. */
+.progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; list-style: none; margin: 4px 0 8px; }
+.progress-step { display: grid; gap: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.progress-step i { display: block; height: 6px; border-radius: 999px; background: var(--chip); transition: background .4s var(--spring); }
+.progress-step.is-done { color: var(--fg); }
+.progress-step.is-done i { background: var(--accent); }
+.progress-step.is-current { color: var(--fg); }
+.progress-step.is-current i { background: linear-gradient(90deg, var(--accent) 50%, var(--chip) 50%); background-size: 200% 100%; animation: step-sweep 1.6s linear infinite; }
+@keyframes step-sweep { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .progress-step.is-current i { animation: none; background: var(--accent); opacity: .55; } }
