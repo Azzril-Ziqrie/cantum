@@ -45,7 +45,7 @@ $m = $cd['mini'];
 <link rel="alternate" hreflang="id" href="<?= e($altId) ?>">
 <link rel="alternate" hreflang="x-default" href="<?= e($altEn) ?>">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#fafafa">
+<meta name="theme-color" content="#f6f8fc">
 <link rel="icon" type="image/png" href="<?= e($logo) ?>">
 <meta property="og:site_name" content="Cantum OnePay">
 <meta property="og:locale" content="<?= LANG === 'id' ? 'id_ID' : 'en_US' ?>">

@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Easing, Img, Sequence, Video, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {ALTER_FRAMES, ALTER_HOLD, BEAT, CLOSE, FONT, HOOK, INK, LAPTOP, MUTED, SOFT, START, TILES, TRANS} from './theme';
+import {ALTER_FRAMES, ALTER_HOLD, BEAT, CLOSE, FONT, HOOK, INK, LAPTOP, MUTED, NOIR_HOLD, SOFT, START, TILES, TRANS} from './theme';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const smooth = (t: number) => t * t * (3 - 2 * t);
@@ -8,7 +8,9 @@ const smooth = (t: number) => t * t * (3 - 2 * t);
 const LAST = TILES.length - 1;
 const ALT = TILES.findIndex((t) => t.laptop);
 /** How long each project holds, and the frame at which project i is centred. Alterthat holds longest. */
-const dur = (i: number) => (i === ALT ? ALTER_HOLD : BEAT);
+const isWide = (i: number) => !!(TILES[i].laptop || TILES[i].video);
+const dur = (i: number) => (i === ALT ? ALTER_HOLD : isWide(i) ? NOIR_HOLD : BEAT);
+const near1 = (i: number, pos: number) => smooth(Math.max(0, Math.min(1, 1 - Math.abs(i - pos))));
 const at = (i: number) => START + TILES.slice(0, i).reduce((s, _, k) => s + dur(k), 0);
 
 /** The one scroll position everything hangs off (list and images), 0 = first project, LAST = Alterthat.
@@ -27,13 +29,13 @@ const usePos = () => {
 // ---- list (left) -----------------------------------------------------------------------------------------------
 const ROW = 96;
 const ALTER_GAP = 44;
-const cum = TILES.map((_, i) => i * ROW + (i > ALT ? ALTER_GAP : 0));
+const cum = TILES.map((_, i) => i * ROW + ALTER_GAP * TILES.slice(0, i).filter((_, k) => isWide(k)).length);
 const FOCUS_Y = 960;
 const ALTER_LIFT = 330;
 
 const List: React.FC<{pos: number}> = ({pos}) => {
   const f = useCurrentFrame();
-  const aAlt = smooth(Math.max(0, Math.min(1, 1 - Math.abs(ALT - pos))));
+  const aAlt = Math.max(...TILES.map((_, i) => (isWide(i) ? near1(i, pos) : 0)));
   const focusY = FOCUS_Y - ALTER_LIFT * aAlt;
   const cumPos = interpolate(pos, TILES.map((_, i) => i), cum, clamp);
   return (
@@ -41,9 +43,9 @@ const List: React.FC<{pos: number}> = ({pos}) => {
       {TILES.map((t, i) => {
         const d = Math.abs(i - pos);
         const near = smooth(Math.max(0, Math.min(1, 1 - d * 1.6)));         // 1 only while this project is the active one
-        const fade = interpolate(d, [0, 1, 2, 3], [1, 0.34, 0.2, 0.1], clamp) * (i === ALT ? 1 : 1 - aAlt);   // the rest step aside while Alterthat has the screen
+        const fade = interpolate(d, [0, 1, 2, 3], [1, 0.34, 0.2, 0.1], clamp) * (isWide(i) ? 1 - Math.max(0, ...TILES.map((_, j) => (j !== i && isWide(j) ? near1(j, pos) : 0))) : 1 - aAlt);   // the rest step aside while Alterthat has the screen
         const intro = interpolate(f, [HOOK + i * 3, HOOK + i * 3 + 22], [0, 1], clamp);
-        const big = i === ALT ? 1 + 0.35 * near : 1;                        // Alterthat grows a little when it is its turn
+        const big = isWide(i) ? 1 + 0.35 * near : 1;                        // Alterthat grows a little when it is its turn
         const y = focusY + (cum[i] - cumPos);
         const name = t.title;
         const text: React.CSSProperties = {fontSize: 28, textTransform: 'uppercase', whiteSpace: 'nowrap', letterSpacing: 0};
@@ -123,11 +125,11 @@ const Panels: React.FC<{pos: number}> = ({pos}) => {
         const d = i - pos;
         const op = Math.max(0, Math.min(1, 1.5 - 2 * Math.abs(d)));
         if (op <= 0) return null;
-        const a = t.laptop ? smooth(Math.max(0, Math.min(1, 1 - Math.abs(d)))) : 0;   // Alterthat opens up while it is the active one
-        const w = t.laptop ? PANEL_W + (LAPTOP_W - PANEL_W) * a : PANEL_W;
+        const a = isWide(i) ? near1(i, pos) : 0;   // Alterthat opens up while it is the active one
+        const w = isWide(i) ? PANEL_W + (LAPTOP_W - PANEL_W) * a : PANEL_W;
         const h = w * t.ratio;
-        const left = t.laptop ? PANEL_X + (40 - PANEL_X) * a : PANEL_X;
-        const cy = FOCUS_Y + d * STRIDE + (t.laptop ? 100 * a : 0);
+        const left = isWide(i) ? PANEL_X + (40 - PANEL_X) * a : PANEL_X;
+        const cy = FOCUS_Y + d * STRIDE + (isWide(i) ? 100 * a : 0);
         const first = i === 0 ? intro : 1;
         return (
           <div key={t.n} style={{position: 'absolute', left, top: cy - h / 2 + (1 - first) * 70, width: w, opacity: op * first}}>
@@ -161,38 +163,24 @@ const Bar: React.FC<{pos: number}> = ({pos}) => {
 /** Opening line. It leaves upward, the same direction the list scrolls, so the hand-off to the first project reads as one move. */
 const Hook: React.FC = () => {
   const f = useCurrentFrame();
-  const words = ['Your', 'website', 'decides', 'if', 'they', 'buy.'];
-  const out = interpolate(f, [HOOK - 16, HOOK + 4], [0, 1], {...clamp, easing: Easing.bezier(0.5, 0, 0.75, 0)});
+    const out = interpolate(f, [HOOK - 16, HOOK + 4], [0, 1], {...clamp, easing: Easing.bezier(0.5, 0, 0.75, 0)});
   if (f > HOOK + 6) return null;
-  const sub = interpolate(f, [30, 48], [0, 1], clamp);
+  const sub = interpolate(f, [8, 34], [0, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: 64, top: 620, width: 900, fontFamily: FONT, color: INK, opacity: 1 - out, transform: `translateY(${-out * 90}px)`, filter: `blur(${out * 6}px)`}}>
-      <div style={{fontSize: 118, lineHeight: 1.0, letterSpacing: '-0.05em', fontWeight: 500}}>
-        {words.map((w, k) => {
-          const p = interpolate(f, [3 + k * 4, 3 + k * 4 + 16], [0, 1], {...clamp, easing: Easing.bezier(0.2, 0.9, 0.25, 1)});
-          return <span key={k} style={{display: 'inline-block', marginRight: '0.2em', opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: `blur(${(1 - p) * 8}px)`}}>{w}</span>;
-        })}
-      </div>
-      <div style={{marginTop: 36, fontSize: 44, letterSpacing: '-0.02em', color: MUTED, opacity: sub, transform: `translateY(${(1 - sub) * 16}px)`}}>We build sites that sell.</div>
+    <div style={{position: 'absolute', left: 64, top: 640, width: 950, fontFamily: FONT, color: INK, opacity: 1 - out, transform: `translateY(${-out * 90}px)`, filter: `blur(${out * 6}px)`}}>
+      <div style={{fontSize: 56, lineHeight: 1.2, letterSpacing: '-0.02em', color: MUTED, opacity: sub, transform: `translateY(${(1 - sub) * 16}px)`}}><b style={{fontWeight: 700, color: INK}}>CANTUM STUDIO</b> is an end-to-end creative practice translating ideas into clear, intuitive visual experiences. Guided by conceptual thinking, the studio works across disciplines to shape brand worlds that are intentional, distinct, and alive.</div>
     </div>
   );
 };
 
-/** Headline that sits above the list once the hook is gone. */
-const Headline: React.FC = () => {
-  const f = useCurrentFrame();
-  const p = interpolate(f, [HOOK + 6, HOOK + 30], [0, 1], clamp);
-  return <div style={{position: 'absolute', left: 64, top: 168, fontFamily: FONT, fontSize: 52, letterSpacing: '-0.04em', color: INK, opacity: p, transform: `translateY(${(1 - p) * 20}px)`}}>Five sites we shipped.</div>;
-};
-
 /** Stays on screen from the first project to the close card, so a viewer who drops out early still sees where to go. */
-const Cta: React.FC = () => {
+const Cta: React.FC<{p?: number}> = ({p: fixed}) => {
   const f = useCurrentFrame();
-  const p = interpolate(f, [HOOK + 16, HOOK + 40], [0, 1], clamp);
+  const p = fixed ?? interpolate(f, [HOOK + 16, HOOK + 40], [0, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: 64, bottom: 96, display: 'flex', alignItems: 'center', gap: 24, fontFamily: FONT, opacity: p, transform: `translateY(${(1 - p) * 20}px)`}}>
-      <span style={{background: INK, color: '#fff', fontSize: 30, padding: '18px 34px', borderRadius: 999, letterSpacing: '-0.01em'}}>Start a project</span>
-      <span style={{fontSize: 30, color: MUTED}}>cantum-studio.site ↗</span>
+    <div style={{position: 'absolute', left: 64, bottom: 56, display: 'flex', alignItems: 'center', gap: 14, fontFamily: FONT, opacity: p, transform: `translateY(${(1 - p) * 20}px)`}}>
+      <span style={{background: INK, color: '#fff', fontSize: 18, padding: '10px 20px', borderRadius: 999, letterSpacing: '-0.01em'}}>Start a project</span>
+      <span style={{fontSize: 18, color: MUTED}}>cantum-studio.site ↗</span>
     </div>
   );
 };
@@ -204,7 +192,6 @@ const Stage: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: dim}}>
       <Hook />
-      <Headline />
       <Panels pos={pos} />
       <List pos={pos} />
       <Cta />
@@ -215,18 +202,11 @@ const Stage: React.FC = () => {
 
 const Close: React.FC = () => {
   const f = useCurrentFrame();
-  const line = (txt: string, from: number, top: number, size: number, color: string) => {
-    const p = interpolate(f, [from, from + 22], [0, 1], clamp);
-    return <div style={{position: 'absolute', left: 64, top, fontFamily: FONT, fontSize: size, letterSpacing: '-0.04em', lineHeight: 1.05, color, opacity: p, transform: `translateY(${(1 - p) * 28}px)`, filter: `blur(${(1 - p) * 8}px)`}}>{txt}</div>;
-  };
+  const p = interpolate(f, [6, 28], [0, 1], clamp);
   return (
     <AbsoluteFill>
-      {line('Cantum Studio', 6, 640, 150, INK)}
-      {line('We design and build websites in Bogor.', 24, 840, 54, INK)}
-      <div style={{position: 'absolute', left: 64, top: 1400, opacity: interpolate(f, [48, 70], [0, 1], clamp), transform: `translateY(${(1 - interpolate(f, [48, 70], [0, 1], clamp)) * 20}px)`, fontFamily: FONT}}>
-        <span style={{display: 'inline-block', background: INK, color: '#fff', fontSize: 44, padding: '26px 54px', borderRadius: 999, letterSpacing: '-0.01em'}}>Start a project</span>
-        <div style={{marginTop: 28, fontSize: 44, color: MUTED, letterSpacing: '-0.02em'}}>cantum-studio.site ↗</div>
-      </div>
+      <div style={{position: 'absolute', left: 64, top: 640, width: 950, fontFamily: FONT, fontSize: 88, letterSpacing: '-0.04em', lineHeight: 1.05, color: INK, opacity: p, transform: `translateY(${(1 - p) * 28}px)`, filter: `blur(${(1 - p) * 8}px)`}}>We can help bring your website ideas to life through end-to-end website development.</div>
+      <Cta p={interpolate(f, [30, 50], [0, 1], clamp)} />
     </AbsoluteFill>
   );
 };

@@ -26,10 +26,10 @@
   // in a look per status. table-fill.png is the drawing's enclosed area; we tint it a flat gray and let the dither pattern it.
   var D = window.CantumDither;
   var LOOK = {   // L = tint brightness; the dither turns it into dots of `primary` on `secondary`
-    free:   { L: 0.93, mode: 'bayer', primary: '#c4c4c4', secondary: '#ffffff' },    // almost white: nothing happening
-    making: { L: 0.45, mode: 'bayer', primary: '#0a0a0a', secondary: '#ffffff' },    // fine checker: in progress
-    served: { L: 0.72, mode: 'bayer', primary: '#8c8c8c', secondary: '#e6e6e6' },    // light dots: done
-    new:    { L: 0.2,  mode: 'noise', primary: '#000000', secondary: '#f5f5f5' }     // solid black, grain shimmers: act now
+    free:   { L: 0.93, mode: 'bayer', primary: '#c3cbdc', secondary: '#ffffff' },    // almost white: nothing happening
+    making: { L: 0.45, mode: 'bayer', primary: '#0a1226', secondary: '#ffffff' },    // fine checker: in progress
+    served: { L: 0.72, mode: 'bayer', primary: '#9fb0d4', secondary: '#e3e7f1' },    // light dots: done
+    new:    { L: 0.2,  mode: 'noise', primary: '#0a1f4d', secondary: '#e8edf8' }     // solid black, grain shimmers: act now
   };
   var fillImg = null, fills = new Map();   // fills: button -> { canvas, key, tex }
 

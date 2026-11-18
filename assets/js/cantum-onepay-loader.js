@@ -35,12 +35,12 @@
     var y0 = h * (1.5 * (1 - p) - 0.5);
     var g = x.createLinearGradient(0, y0, 0, y0 + h * 0.5);
     g.addColorStop(0, '#ffffff');
-    g.addColorStop(1, '#0b0b0b');
+    g.addColorStop(1, '#0a1226');
     x.fillStyle = g;
     x.fillRect(0, 0, w, h);
     x.globalCompositeOperation = 'destination-in';
     x.drawImage(img, 0, 0, w, h);                      // keep only the table's body
-    D.render(canvas, src, { gridSize: 2, ditherMode: 'bayer', colorMode: 'duotone', primaryColor: '#0b0b0b', secondaryColor: '#ffffff' }, 0);
+    D.render(canvas, src, { gridSize: 2, ditherMode: 'bayer', colorMode: 'duotone', primaryColor: '#0a1226', secondaryColor: '#ffffff' }, 0);
   }
 
   function leave() {
