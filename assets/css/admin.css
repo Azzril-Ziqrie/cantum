@@ -22,7 +22,7 @@
 .list { width: 100%; border-collapse: collapse; font-size: 10px; margin-bottom: 1.25rem; }
 .list th { text-align: left; font-weight: 500; color: var(--muted); font-size: 10px; padding: .5rem .5rem; border-bottom: 1px solid var(--line); }
 .list td { padding: .6rem .5rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
-.list .th img { width: 64px; height: 48px; object-fit: cover; border-radius: 4px; }
+.list .th img, .list .th video { width: 64px; height: 48px; object-fit: cover; border-radius: 4px; }
 .acts { display: flex; gap: .9rem; white-space: nowrap; color: var(--muted); }
 .acts a:hover { color: var(--fg); }
 .pill { font-size: 10px; padding: .15rem .55rem; border-radius: 999px; background: var(--soft); color: var(--muted); }
@@ -45,7 +45,7 @@ fieldset { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1
 legend { padding: 0 .4rem; font-size: 10px; color: var(--muted); }
 .imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .9rem; }
 .imgcard { display: grid; gap: .4rem; font-size: 10px; }
-.imgcard img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: var(--soft); }
+.imgcard img, .imgcard video { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: var(--soft); }
 .err, .ok { padding: .7rem .9rem; border-radius: 10px; font-size: 10px; margin-bottom: 1rem; }
 .err { background: #fef3f2; color: #b42318; }
 .ok { background: #e7f6ec; color: #067647; }

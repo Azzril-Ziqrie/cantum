@@ -17,7 +17,7 @@ if (http_response_code() === 200) stats_pageview(LANG . ':' . ($canonicalPath ==
 $metaImage = $metaImage ?? null;
 if (!$metaImage) {   // share previews for pages without their own image: the studio's first project cover
     $first = db()->query('SELECT * FROM projects WHERE published = 1 ORDER BY sort_order ASC, year DESC, id DESC LIMIT 1')->fetch();
-    if ($first && ($c = project_cover($first))) $metaImage = abs_url('uploads/' . $c);
+    if ($first && ($c = project_cover($first)) && !is_video($c)) $metaImage = abs_url('uploads/' . $c);
 }
 $schemas = array_merge([org_schema(), [
     '@context' => 'https://schema.org', '@type' => 'WebSite', '@id' => abs_url('#website'),

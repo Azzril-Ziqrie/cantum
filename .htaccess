@@ -55,8 +55,8 @@ RewriteRule ^id/(about|contact|index-list|pricing|project|cantum-onepay|cantum-o
 # internal code is never served over HTTP
 RewriteRule ^inc/ - [F,L]
 
-# the CantumDine-IN working folder (goal.md, sales deck, video source) is never served over HTTP
-RewriteRule ^(CantumDine-IN|HomeReel)(/|$) - [F,NC,L]
+# the CantumOnePay working folder (goal.md, sales deck, video source) is never served over HTTP
+RewriteRule ^(CantumOnePay|HomeReel)(/|$) - [F,NC,L]
 
 # clean URLs: /about → about.php, /admin/login → admin/login.php (real files and folders are left alone)
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -52,7 +52,7 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 .card.m { grid-column: span 5; }   /* near-square */
 .card.p { grid-column: span 4; }   /* portrait */
 .thumb { background: var(--soft); transition: transform .4s var(--spring); }
-.thumb img, .thumb .ph { width: 100%; height: auto; transition: transform 1s var(--spring); }
+.thumb img, .thumb video, .thumb .ph { width: 100%; height: auto; transition: transform 1s var(--spring); }
 .thumb .ph { aspect-ratio: 4 / 5; }
 .thumb { overflow: hidden; }
 .card:hover .thumb img { transform: scale(1.025); }
@@ -105,7 +105,7 @@ main { padding: 78px var(--gutter) 10vh; flex: 1 0 auto; }
 @media (max-width: 640px) { .desc { margin-left: 0; } }
 .gallery { display: grid; gap: var(--gutter); }
 .gallery figure { background: var(--soft); }
-.gallery img { width: 100%; height: auto; }
+.gallery img, .gallery video { width: 100%; height: auto; display: block; }
 .pnav { display: flex; justify-content: space-between; margin-top: 80px; }
 .pnav a:hover { opacity: .5; }
 

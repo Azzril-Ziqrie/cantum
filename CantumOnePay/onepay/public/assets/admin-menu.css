@@ -1,0 +1,39 @@
+/* Admin menu: daftar, form, dan tab. Memakai token desain OnePay dari app.css. */
+.am .tabs { margin-bottom: 18px; }
+.am .tab { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: var(--chip); transition: transform .4s var(--spring), background .2s; }
+.am .tab:active { transform: scale(.95); transition-duration: .08s; }
+.am .tab[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.am .notice { margin-bottom: 14px; }
+.am code { font-size: 12px; background: var(--chip); padding: 1px 6px; border-radius: 6px; }
+
+.am-list { padding: 6px 18px; }
+.am-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.am-row:first-child { border-top: 0; }
+.am-grow { flex: 1 1 180px; min-width: 0; }
+.am-grow small { display: block; }
+.am-thumb { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; background: var(--chip); flex: none; }
+.am-thumb--empty { display: inline-block; }
+.am-thumb--big { width: 96px; height: 96px; border-radius: 18px; }
+
+.am input:not([type="checkbox"]):not([type="file"]), .am select, .am textarea {
+  width: 100%; height: 44px; padding: 0 14px; border: 0; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line) inset;
+}
+.am textarea { height: auto; padding: 10px 14px; resize: vertical; }
+.am input[type="file"] { width: 100%; font-size: 13px; }
+.am input[type="checkbox"] { accent-color: var(--accent); width: 18px; height: 18px; }
+.am label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.am label > input:not([type="checkbox"]), .am label > select, .am label > textarea { margin-top: 6px; color: var(--fg); text-transform: none; letter-spacing: -.02em; font-size: 15px; }
+.am-check { display: inline-flex !important; align-items: center; gap: 8px; width: auto; text-transform: none !important; font-size: 14px !important; color: var(--fg) !important; letter-spacing: -.02em; white-space: nowrap; }
+.am-narrow { flex: 0 0 90px; width: 90px !important; }
+.am-price { flex: 0 0 150px; width: 150px !important; }
+.am-inline { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; }
+.am-inline > label { flex: 1 1 160px; }
+.am-inline > .am-check { align-self: center; }
+.am-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.am-wide { grid-column: 1 / -1; }
+.am-photo { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.am-flags { display: flex; gap: 22px; flex-wrap: wrap; }
+.am-bundle { border: 0; padding: 0; }
+.am-toggle { min-width: 104px; }
+.am-toggle.is-saving { opacity: .5; }
+.am-row.is-sold-out .am-grow b { text-decoration: line-through; opacity: .6; }

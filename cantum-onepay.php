@@ -45,7 +45,7 @@ $m = $cd['mini'];
 <link rel="alternate" hreflang="id" href="<?= e($altId) ?>">
 <link rel="alternate" hreflang="x-default" href="<?= e($altEn) ?>">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#fafafa">
+<meta name="theme-color" content="#f6f8fc">
 <link rel="icon" type="image/png" href="<?= e($logo) ?>">
 <meta property="og:site_name" content="Cantum OnePay">
 <meta property="og:locale" content="<?= LANG === 'id' ? 'id_ID' : 'en_US' ?>">
@@ -61,7 +61,7 @@ $m = $cd['mini'];
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap">
-<link rel="stylesheet" href="<?= e($asset('css/cantumdine.css')) ?>">
+<link rel="stylesheet" href="<?= e($asset('css/cantum-onepay.css')) ?>">
 <?= json_ld($schemas) ?>
 </head>
 <body>
@@ -216,10 +216,10 @@ $m = $cd['mini'];
 </div>
 
 <script src="<?= e($asset('js/dither.js')) ?>" defer></script>
-<script src="<?= e($asset('js/cantumdine-loader.js')) ?>" defer></script>
-<script src="<?= e($asset('js/cantumdine.js')) ?>" defer></script>
-<script src="<?= e($asset('js/cantumdine-topo.js')) ?>" defer></script>
-<script src="<?= e($asset('js/cantumdine-menu.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantum-onepay-loader.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantum-onepay.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantum-onepay-topo.js')) ?>" defer></script>
+<script src="<?= e($asset('js/cantum-onepay-menu.js')) ?>" defer></script>
 <script src="<?= e($asset('js/main.js')) ?>" data-track="<?= e(url('track.php')) ?>" defer></script>
 </body>
 </html>

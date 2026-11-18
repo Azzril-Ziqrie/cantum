@@ -228,6 +228,16 @@ function clean_path(string $path): string
 }
 function url(string $path = ''): string { return BASE . '/' . ltrim(clean_path($path), '/'); }
 function upload_url(string $file): string { return url('uploads/' . rawurlencode($file)); }
+function is_video(string $file): bool { return in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), ['mp4', 'webm', 'mov'], true); }
+/** <video> for video files, <img> otherwise. $attrs is extra attribute HTML; $loop makes it a silent autoplay loop (covers). */
+function media_tag(string $file, string $alt = '', string $attrs = '', bool $loop = false): string
+{
+    if (is_video($file)) {
+        $a = $loop ? 'muted loop autoplay playsinline preload="metadata"' : 'controls playsinline preload="metadata"';
+        return '<video src="' . upload_url($file) . '" ' . $a . ' ' . $attrs . '></video>';
+    }
+    return '<img src="' . upload_url($file) . '" alt="' . e($alt) . '" ' . $attrs . '>';
+}
 
 function slugify(string $s): string
 {
@@ -297,7 +307,8 @@ function save_uploads(string $field): array
     $saved = [];
     $errors = [];
     if (empty($_FILES[$field]['name'][0])) return [$saved, $errors];
-    $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'];
+    $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif',
+                'video/mp4' => 'mp4', 'video/webm' => 'webm', 'video/quicktime' => 'mov', 'video/x-m4v' => 'mp4'];
     $count = count($_FILES[$field]['name']);
     for ($i = 0; $i < $count; $i++) {
         $name = $_FILES[$field]['name'][$i];
@@ -306,9 +317,9 @@ function save_uploads(string $field): array
         if ($err === UPLOAD_ERR_NO_FILE) continue;
         if ($err === UPLOAD_ERR_INI_SIZE || $err === UPLOAD_ERR_FORM_SIZE) { $errors[] = "$name: melebihi batas server (" . ini_get('upload_max_filesize') . " per file). Kecilkan ukurannya."; continue; }
         if ($err !== UPLOAD_ERR_OK) { $errors[] = "$name: upload gagal (kode $err), coba lagi."; continue; }
-        if ($_FILES[$field]['size'][$i] > 15 * 1024 * 1024) { $errors[] = "$name: lebih dari 15MB, kecilkan dulu."; continue; }
         $mime = (new finfo(FILEINFO_MIME_TYPE))->file($tmp);
-        if (!isset($allowed[$mime]) || !@getimagesize($tmp)) { $errors[] = "$name: not a supported image (JPG, PNG, WebP, GIF)."; continue; }
+        $isVideo = str_starts_with($mime, 'video/');
+        if (!isset($allowed[$mime]) || (!$isVideo && !@getimagesize($tmp))) { $errors[] = "$name: format tidak didukung (JPG, PNG, WebP, GIF, MP4, WebM, MOV)."; continue; }
         $fn = bin2hex(random_bytes(8)) . '.' . $allowed[$mime];
         if (!move_uploaded_file($tmp, UPLOAD_DIR . '/' . $fn)) { $errors[] = "$name: could not be saved."; continue; }
         $saved[] = $fn;

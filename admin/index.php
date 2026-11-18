@@ -40,7 +40,7 @@ admin_head('Projects');
     <tbody>
     <?php foreach ($projects as $p): $c = project_cover($p); ?>
       <tr>
-        <td class="th"><?php if ($c): ?><img src="<?= upload_url($c) ?>" alt=""><?php endif; ?></td>
+        <td class="th"><?php if ($c): ?><?= media_tag($c, '', '', true) ?><?php endif; ?></td>
         <td><a href="<?= url('admin/edit.php?id=' . $p['id']) ?>"><strong><?= e($p['title']) ?></strong></a></td>
         <td><?= e($p['category']) ?></td>
         <td><?= e($p['year']) ?></td>

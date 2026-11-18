@@ -1,0 +1,5 @@
+/* Halaman bayar: logo bank, kartu kedaluwarsa. */
+.pay-method { display: inline-flex; align-items: center; gap: 10px; }
+.bank-logo { height: 28px; width: auto; max-width: 96px; object-fit: contain; }
+#payCard.is-expired .qr, #payCard.is-expired .code, #payCard.is-expired .steps, #payCard.is-expired .actions,
+#payCard.is-expired [data-copy], #payCard.is-expired .muted { opacity: .25; pointer-events: none; filter: grayscale(1); }

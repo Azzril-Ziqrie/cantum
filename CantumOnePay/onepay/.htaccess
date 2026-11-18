@@ -1,0 +1,28 @@
+# Dipakai HANYA bila domain diarahkan ke folder proyek ini (bukan ke public/), seperti public_html di shared hosting.
+# Lebih aman: arahkan document root ke folder public/ (lihat docs/DEPLOY-HOSTINGER.md). Berkas ini jaring pengaman.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. Berkas statis yang memang ada di public/ (css, js, gambar, foto menu lewat public/storage) dilayani apa adanya.
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+    RewriteRule ^ public%{REQUEST_URI} [L]
+
+    # 2. Berkas dan folder internal tidak pernah dilayani lewat web.
+    RewriteRule ^(\.env.*|\.git.*|\.gitignore|\.gitattributes|\.editorconfig|artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md)$ - [F,L,NC]
+    RewriteRule ^(app|bootstrap|config|database|docs|routes|storage|tests|tools|vendor|resources)(/|$) - [F,L,NC]
+
+    # 3. Selain itu, serahkan ke public/ (index.php Laravel).
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Tanpa mod_rewrite, tolak seluruh akses daripada membuka kode sumber.
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes

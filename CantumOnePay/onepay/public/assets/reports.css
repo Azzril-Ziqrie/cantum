@@ -1,0 +1,77 @@
+/* Laporan penjualan. Hitam-putih: satu warna tinta, sorotan puncak dengan tinta penuh, sisanya abu. */
+.rp { --ink: var(--fg); --ink-soft: #c9c9c9; }
+.rp-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin-bottom: 14px; }
+.rp-filters .field { min-width: 150px; }
+.rp-filters select, .rp-filters input[type="date"] {
+  width: 100%; height: 48px; padding: 0 16px; border: 0; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px var(--line) inset;
+}
+.rp-presets { margin: 0; }
+.rp-preset { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: var(--chip); transition: transform .4s var(--spring); }
+.rp-preset:active { transform: scale(.95); transition-duration: .08s; }
+.rp-scope { margin: 6px 0 14px; }
+
+.rp-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 8px 0 8px; }
+.rp-hero { grid-column: span 2; }
+.rp-big { font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: -.06em; line-height: 1.05; margin: 6px 0; }
+.rp-num { font-size: 1.5rem; letter-spacing: -.05em; line-height: 1.15; margin-top: 4px; }
+.rp-num small { font-size: 12px; letter-spacing: 0; color: var(--muted); }
+.rp-section { margin-top: 8px; }
+.rp-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.rp-funnel { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 14px; }
+
+/* tabel */
+.rp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.rp-table caption { text-align: left; padding-bottom: 8px; }
+.rp-table th { text-align: left; font-weight: 400; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; color: var(--muted); padding: 0 8px 8px 0; }
+.rp-table td { padding: 9px 8px 9px 0; border-top: 1px solid var(--line); vertical-align: middle; }
+.rp-table tfoot td { font-weight: 500; border-top: 1.5px solid var(--accent); }
+.rp-table .r { text-align: right; padding-right: 0; padding-left: 8px; white-space: nowrap; }
+.rp-table small { color: var(--muted); }
+.rp-scroll { overflow-x: auto; }
+.rp-bar-col { width: 32%; }
+.rp-bar { display: block; height: 10px; width: var(--w); min-width: 2px; background: var(--ink); border-radius: 0 4px 4px 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* grafik kolom: tinggi dari --h, puncak bertinta penuh */
+.rp-chart { display: flex; align-items: flex-end; gap: 4px; height: 190px; padding-top: 8px; border-bottom: 1px solid var(--line); }
+.rp-col { position: relative; flex: 1 1 0; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; outline-offset: 2px; }
+.rp-col i { display: block; height: var(--h); min-height: 2px; background: var(--ink-soft); border-radius: 4px 4px 0 0; transition: height .5s var(--spring), background .2s; }
+.rp-col.is-peak i, .rp-col:hover i, .rp-col:focus-visible i { background: var(--ink); }
+.rp-col span { position: absolute; left: 0; right: 0; bottom: -22px; text-align: center; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.rp-chart { margin-bottom: 26px; }
+.rp-chart--days { gap: 3px; }
+.rp-chart--days.is-dense { gap: 1px; }
+.rp-chart--days.is-dense .rp-col i { border-radius: 2px 2px 0 0; }
+.rp-chart--days .rp-col span { overflow: visible; }
+.rp-table-toggle { margin-top: 12px; }
+.rp-table-toggle summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+.rp-table-toggle table { margin-top: 10px; }
+
+/* tooltip (hover dan fokus keyboard) */
+.rp-tip { position: fixed; z-index: 60; pointer-events: none; padding: 8px 12px; border-radius: 12px; background: rgba(11,11,11,.92); color: #fff; font-size: 12px; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); }
+
+/* cetak / PDF */
+.rp-print { background: #fff; }
+.rp-print-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin: 24px 0 8px; }
+.rp-print .wrap { padding-bottom: 40px; }
+.rp-print .card { box-shadow: 0 0 0 1px var(--line) inset; }
+
+@media (max-width: 760px) {
+  .rp-hero { grid-column: span 1; }
+  .rp-two { grid-template-columns: 1fr; }
+  .rp-chart--hours .rp-col span { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .rp-col i, .rp-preset { transition: none; } }
+@media (prefers-contrast: more) { .rp-col i { background: #6b6b6b; } .rp-col.is-peak i, .rp-col:hover i { background: var(--accent); } }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body, .rp-print { background: #fff !important; }
+  .rp-noprint, .rp-tip, .rp-table-toggle summary { display: none !important; }
+  .rp-table-toggle { display: block; }
+  .rp-table-toggle:not([open]) table { display: none; }
+  .card { box-shadow: none !important; border: 1px solid #ddd; break-inside: avoid; }
+  .rp-section { break-inside: avoid-page; }
+  .rp-col i { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rp-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rp-col.is-peak i, .rp-bar { background: var(--accent) !important; }
+}

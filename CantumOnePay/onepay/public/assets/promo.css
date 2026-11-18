@@ -1,0 +1,10 @@
+/* Promo di halaman pelanggan: banner di menu dan baris kode promo di keranjang. */
+.promos { display: grid; gap: 8px; margin: 0 0 20px; }
+.promo { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 12px 16px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px var(--line) inset; font-size: 14px; }
+.promo .tag { margin: 0; background: var(--accent); color: #fff; }
+.promo-code { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.promo-code input { text-transform: uppercase; }
+.promo-code .btn { height: 48px; padding: 0 20px; }
+.promo-note { font-size: 13px; }
+.promo-note--ok { color: var(--fg); }
+.promo-note--bad { color: var(--warn); }

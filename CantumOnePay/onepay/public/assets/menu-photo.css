@@ -1,0 +1,8 @@
+/* Foto menu di halaman pelanggan: kolom foto di kiri, teks dan tombol tetap sejajar. */
+.menu-item--photo { grid-template-columns: 96px 1fr auto; column-gap: 16px; }
+.menu-photo { grid-row: 1 / span 2; width: 96px; height: 96px; object-fit: cover; border-radius: 18px; background: var(--chip); }
+.menu-item--photo h3 { grid-column: 2; }
+.menu-item--photo .price { grid-column: 3; }
+.menu-item--photo p { grid-column: 2; }
+.menu-item--photo .add { grid-column: 3; }
+@media (max-width: 420px) { .menu-item--photo { grid-template-columns: 72px 1fr auto; } .menu-photo { width: 72px; height: 72px; border-radius: 14px; } }

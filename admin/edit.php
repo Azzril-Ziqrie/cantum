@@ -108,7 +108,7 @@ admin_head($p['id'] ? 'Edit project' : 'New project');
     <div class="imgs">
       <?php foreach ($images as $im): ?>
         <div class="imgcard">
-          <img src="<?= upload_url($im['filename']) ?>" alt="">
+          <?= media_tag($im['filename'], '', '', true) ?>
           <label class="check"><input type="radio" name="cover" value="<?= $im['id'] ?>" <?= (int)$p['cover_id'] === (int)$im['id'] ? 'checked' : '' ?>> Cover</label>
           <label>Order <input class="num" type="number" name="img_order[<?= $im['id'] ?>]" value="<?= (int)$im['sort_order'] ?>"></label>
           <label class="check danger"><input type="checkbox" name="remove[]" value="<?= $im['id'] ?>"> Remove</label>
@@ -117,10 +117,10 @@ admin_head($p['id'] ? 'Edit project' : 'New project');
     </div>
     <p class="muted">If no cover is chosen, the first image is used.</p>
     <?php endif; ?>
-    <label>Add images<input type="file" name="images[]" id="files" accept="image/jpeg,image/png,image/webp,image/gif" multiple></label>
+    <label>Add images / videos<input type="file" name="images[]" id="files" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" multiple></label>
     <div id="preview" class="imgs"></div>
-    <?php $lim = min(ini_bytes(ini_get('upload_max_filesize')), 15 * 1024 * 1024); $tot = ini_bytes(ini_get('post_max_size')); ?>
-    <p class="muted">JPG, PNG, WebP, atau GIF · maks <?= round($lim / 1048576) ?>MB per foto · total sekali simpan maks <?= round($tot / 1048576) ?>MB. Boleh pilih banyak foto sekaligus.</p>
+    <?php $lim = ini_bytes(ini_get('upload_max_filesize')); $tot = ini_bytes(ini_get('post_max_size')); if ($tot <= 0) $tot = PHP_INT_MAX; ?>
+    <p class="muted">JPG, PNG, WebP, GIF, MP4, WebM, MOV · maks <?= round($lim / 1048576) ?>MB per file<?= $tot === PHP_INT_MAX ? ', total tanpa batas' : ' · total maks ' . round($tot / 1048576) . 'MB' ?>. Boleh pilih banyak file sekaligus.</p>
     <p class="err" id="toobig" hidden></p>
   </fieldset>
 
@@ -130,7 +130,7 @@ admin_head($p['id'] ? 'Edit project' : 'New project');
   </div>
 </form>
 <script>
-var MAX_FILE = <?= (int)$lim ?>, MAX_TOTAL = <?= (int)$tot ?>;
+var MAX_FILE = <?= (int)$lim ?>, MAX_TOTAL = <?= $tot === PHP_INT_MAX ? '1e15' : (int)$tot ?>;
 document.getElementById('files').addEventListener('change', function () {
   var warn = document.getElementById('toobig'), total = 0, big = [];
   Array.prototype.forEach.call(this.files, function (f) { total += f.size; if (f.size > MAX_FILE) big.push(f.name); });
@@ -141,7 +141,7 @@ document.getElementById('files').addEventListener('change', function () {
   var box = document.getElementById('preview'); box.innerHTML = '';
   Array.prototype.forEach.call(this.files, function (f) {
     var d = document.createElement('div'); d.className = 'imgcard';
-    var i = document.createElement('img'); i.src = URL.createObjectURL(f); d.appendChild(i); box.appendChild(d);
+    var i = document.createElement(f.type.indexOf('video') === 0 ? 'video' : 'img'); i.src = URL.createObjectURL(f); if (i.tagName === 'VIDEO') { i.muted = true; i.preload = 'metadata'; } d.appendChild(i); box.appendChild(d);
   });
 });
 </script>
